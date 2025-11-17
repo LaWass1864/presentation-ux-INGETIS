@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation UX/UI Design - Session 2 : Recherche</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .presentation {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.5s ease;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        h4 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin: 20px 0 10px;
+            font-weight: 600;
+        }
+
+        p, li {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .intro-slide {
+            text-align: center;
+        }
+
+        .intro-slide h1 {
+            font-size: 4em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+        }
+
+        .box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .box.success {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-left-color: #28a745;
+        }
+
+        .box.danger {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            border-left-color: #dc3545;
+        }
+
+        .box.warning {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left-color: #ffc107;
+        }
+
+        .box.info {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            border-left-color: #17a2b8;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin: 15px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateX(10px);
+        }
+
+        .card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .process-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            flex: 1;
+            margin: 10px;
+            min-width: 150px;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .process-step .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .theme-card {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .theme-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .badge.mobile {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .badge.web {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #d63384;
+            font-size: 0.9em;
+        }
+
+        strong {
+            color: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 30px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+            .two-columns, .three-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div class="slide-number" id="slideNumber">1 / 27</div>
+
+        <!-- Slide 1: Titre -->
+        <div class="slide intro-slide active">
+            <h1>🎯 SESSION 2</h1>
+            <h2>PHASE RECHERCHE</h2>
+            <p style="font-size: 1.5em; color: #999; margin-top: 40px;">UX/UI Design - De la Recherche au Prototype</p>
+            <p style="margin-top: 60px;">📅 18 Novembre 2025 | 9h00 - 12h30</p>
+        </div>
+
+        <!-- Slide 2: Programme de la journée -->
+        <div class="slide">
+            <h2>📋 PROGRAMME DE LA JOURNÉE</h2>
+            <div class="process-flow">
+                <div class="process-step" style="background: #e8f5e9;">
+                    <div class="icon">🎮</div>
+                    <h4>9h00 - 9h15</h4>
+                    <p>Kahoot révision</p>
+                </div>
+                <div class="process-step" style="background: #fff3cd;">
+                    <div class="icon">🎯</div>
+                    <h4>9h15 - 9h45</h4>
+                    <p>Présentation thèmes + Constitution équipes</p>
+                </div>
+                <div class="process-step" style="background: #f3e5f5;">
+                    <div class="icon">☕</div>
+                    <h4>9h45 - 10h00</h4>
+                    <p>Pause</p>
+                </div>
+                <div class="process-step" style="background: #d1ecf1;">
+                    <div class="icon">🔬</div>
+                    <h4>10h00 - 12h30</h4>
+                    <p>Phase RECHERCHE : Théorie + Atelier pratique</p>
+                </div>
+            </div>
+            <div class="box info center">
+                <p style="font-size: 1.3em; margin: 0;"><strong>💡 Objectif du jour :</strong> Comprendre vos utilisateurs avant de concevoir quoi que ce soit</p>
+            </div>
+        </div>
+
+        <!-- Slide 3: Le parcours global -->
+        <div class="slide">
+            <h2>🗺️ VOTRE PARCOURS SUR 5 MOIS</h2>
+            <div class="card" style="background: #e8f5e9; border-left-color: #28a745;">
+                <h4>✅ Session 1 (21/10/2025)</h4>
+                <p>→ Fondamentaux UX/UI</p>
+            </div>
+            <div class="card" style="background: #fff3cd; border-left-color: #ffc107;">
+                <h4>← Session 2 (18/11/2025) AUJOURD'HUI</h4>
+                <p>→ <strong>RECHERCHE</strong> : Comprendre le problème</p>
+            </div>
+            <div class="card">
+                <h4>Session 3 (Décembre 2025)</h4>
+                <p>→ <strong>DÉFINIR</strong> : Cadrer la solution</p>
+            </div>
+            <div class="card">
+                <h4>Session 4 (Janvier 2026)</h4>
+                <p>→ <strong>IDÉER + PROTOTYPER</strong> : Créer des solutions</p>
+            </div>
+            <div class="card" style="background: #d4edda; border-left-color: #28a745;">
+                <h4>Session 5 (Février 2026) 🎯</h4>
+                <p>→ <strong>TESTER + PRÉSENTATION FINALE</strong></p>
+                <p style="margin-top: 10px; font-size: 0.95em;">Vous présenterez votre projet complet devant le groupe !</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Kahoot! -->
+        <div class="slide center">
+            <h1 style="font-size: 4em;">🎮</h1>
+            <h2>C'EST L'HEURE DU KAHOOT !</h2>
+            <div class="box info" style="margin-top: 60px;">
+                <h3>📱 Rendez-vous sur kahoot.it</h3>
+                <p style="font-size: 2em; margin: 30px 0; font-weight: bold; color: #667eea;">Code PIN : [À AFFICHER]</p>
+            </div>
+            <div class="box warning" style="margin-top: 40px;">
+                <p style="font-size: 1.3em;"><strong>⏱️ Durée : 15 minutes</strong></p>
+                <p>Révision rapide de la session 1 : Fondamentaux UX/UI</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Rappel Double Diamant -->
+        <div class="slide">
+            <h2>💎 RAPPEL - LE DOUBLE DIAMANT</h2>
+            <div class="center" style="font-size: 1.3em; margin: 40px 0;">
+                <p><strong>DIVERGER</strong> → <strong>CONVERGER</strong> → <strong>DIVERGER</strong> → <strong>CONVERGER</strong></p>
+            </div>
+            <div class="process-flow">
+                <div class="process-step" style="background: #fff3cd;">
+                    <div class="icon">🔍</div>
+                    <h4>DÉCOUVRIR</h4>
+                    <p>Explorer le problème</p>
+                </div>
+                <div class="process-step" style="background: #cfe2ff;">
+                    <div class="icon">🎯</div>
+                    <h4>DÉFINIR</h4>
+                    <p>Cadrer le défi</p>
+                </div>
+                <div class="process-step" style="background: #d1ecf1;">
+                    <div class="icon">💡</div>
+                    <h4>DÉVELOPPER</h4>
+                    <p>Créer des solutions</p>
+                </div>
+                <div class="process-step" style="background: #d4edda;">
+                    <div class="icon">✅</div>
+                    <h4>DÉLIVRER</h4>
+                    <p>Implémenter</p>
+                </div>
+            </div>
+            <div class="box danger">
+                <p style="font-size: 1.2em;"><strong>⚠️ Erreur #1 en UX :</strong> Sauter la phase Découvrir</p>
+                <p><code>= Coder sans comprendre les besoins</code></p>
+            </div>
+            <p class="center" style="font-size: 1.5em; color: #667eea; margin-top: 30px;"><strong>← NOUS SOMMES ICI AUJOURD'HUI</strong></p>
+        </div>
+
+        <!-- Slide 6: Pourquoi la recherche -->
+        <div class="slide">
+            <h2>🎯 POURQUOI FAIRE DE LA RECHERCHE ?</h2>
+            <div class="box danger center">
+                <p style="font-size: 1.5em; margin: 0;"><strong>❌ CE QUE VOUS PENSEZ ≠ CE DONT ILS ONT BESOIN</strong></p>
+            </div>
+            <h3>💀 Exemple réel : Google Glass (2013)</h3>
+            <div class="two-columns">
+                <div class="card">
+                    <h4>💭 Google pensait :</h4>
+                    <p>"Les gens veulent un écran devant les yeux"</p>
+                </div>
+                <div class="card" style="background: #f8d7da; border-left-color: #dc3545;">
+                    <h4>😤 Les gens disaient :</h4>
+                    <p>"C'est intrusif, on a l'air bizarre, ça viole la vie privée"</p>
+                </div>
+            </div>
+            <div class="box danger center">
+                <p style="font-size: 1.3em; margin: 0;"><strong>💀 Résultat : Échec cuisant</strong></p>
+            </div>
+            <div class="box success" style="margin-top: 30px;">
+                <h4>La recherche vous permet de :</h4>
+                <ul>
+                    <li>✅ Éviter les hypothèses dangereuses</li>
+                    <li>✅ Révéler les vrais besoins (pas les désirs imaginés)</li>
+                    <li>✅ Gagner du temps (et de l'argent !)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 7: Les 6 thèmes -->
+        <div class="slide">
+            <h2>🎨 LES 6 THÈMES AU CHOIX</h2>
+            <div class="three-columns">
+                <div class="card">
+                    <div class="theme-number">1</div>
+                    <p><strong>Plateforme gestion projets tech</strong></p>
+                    <span class="badge web">💻 Web</span>
+                </div>
+                <div class="card">
+                    <div class="theme-number">2</div>
+                    <p><strong>Appli santé mentale développeurs</strong></p>
+                    <span class="badge mobile">📱 Mobile</span>
+                </div>
+                <div class="card">
+                    <div class="theme-number">3</div>
+                    <p><strong>Appli budget jeunes actifs</strong></p>
+                    <span class="badge mobile">📱 Mobile</span>
+                </div>
+                <div class="card">
+                    <div class="theme-number">4</div>
+                    <p><strong>Plateforme co-programmation</strong></p>
+                    <span class="badge web">💻 Web</span>
+                </div>
+                <div class="card">
+                    <div class="theme-number">5</div>
+                    <p><strong>Appli réseautage événements tech</strong></p>
+                    <span class="badge mobile">📱 Mobile</span>
+                </div>
+                <div class="card">
+                    <div class="theme-number">6</div>
+                    <p><strong>Appli coaching sportif</strong></p>
+                    <span class="badge mobile">📱 Mobile</span>
+                </div>
+            </div>
+            <p class="center" style="margin-top: 30px; font-size: 1.2em;">📋 <strong>Détails : 1 diapositive par thème après</strong></p>
+        </div>
+
+        <!-- Slides 8-13: Thèmes détaillés -->
+        <div class="slide">
+            <div class="theme-card">
+                <div class="theme-number">1</div>
+                <h2>PLATEFORME DE GESTION DE PROJETS TECH</h2>
+                
+                <h3>😤 LE PROBLÈME</h3>
+                <p>Jira/Trello sont inadaptés aux besoins réels des équipes tech. Trop lourd, pas pensé pour développeurs/analystes de données.</p>
+                
+                <h3>👥 UTILISATEURS</h3>
+                <ul>
+                    <li>Développeur back-end/front-end</li>
+                    <li>Analyste de données</li>
+                    <li>Responsable technique</li>
+                    <li>Responsable produit</li>
+                </ul>
+                
+                <h3>🎯 MISSION</h3>
+                <p>Concevoir une plateforme de gestion de projets pensée PAR et POUR les équipes tech.</p>
+                
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="box info">
+                        <p><strong>💻 PLATEFORME</strong></p>
+                        <p>Tableau de bord Web</p>
+                    </div>
+                    <div class="box success">
+                        <p><strong>💡 POURQUOI C'EST INTÉRESSANT</strong></p>
+                        <p>Vous VIVEZ ce problème. Utilisateurs = vous et vos collègues !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="theme-card">
+                <div class="theme-number">2</div>
+                <h2>APPLI DE SANTÉ MENTALE POUR DÉVELOPPEURS</h2>
+                
+                <h3>😤 LE PROBLÈME</h3>
+                <p>Épuisement, stress, sédentarité = fléaux dans la 
+tech. Applications existantes ne comprennent pas les spécificités du 
+développeur.</p>
+                
+                <h3>👥 UTILISATEURS</h3>
+                <ul>
+                    <li>Développeurs</li>
+                    <li>Scientifiques des données</li>
+                    <li>Travailleurs de la tech</li>
+                </ul>
+                
+                <h3>🎯 MISSION</h3>
+                <p>Application mobile de suivi et prévention de l'épuisement adaptée aux travailleurs tech.</p>
+                
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="box info">
+                        <p><strong>📱 PLATEFORME</strong></p>
+                        <p>Application mobile</p>
+                    </div>
+                    <div class="box success">
+                        <p><strong>💡 POURQUOI C'EST INTÉRESSANT</strong></p>
+                        <p>Sujet sensible et pertinent. Impact positif. Utilisateurs = votre communauté.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="theme-card">
+                <div class="theme-number">3</div>
+                <h2>APPLI DE GESTION DE BUDGET POUR JEUNES ACTIFS</h2>
+                
+                <h3>😤 LE PROBLÈME</h3>
+                <p>Applications finances = trop complexes (banques) ou 
+trop simples (applications basiques). Les 25-35 ans ont besoin d'un 
+outil qui grandit avec eux.</p>
+                
+                <h3>👥 UTILISATEURS</h3>
+                <ul>
+                    <li>Jeunes actifs 25-35 ans</li>
+                    <li>Premiers vrais salaires</li>
+                    <li>Veulent épargner, investir, comprendre</li>
+                </ul>
+                
+                <h3>🎯 MISSION</h3>
+                <p>Application de gestion financière personnelle moderne. Catégorisation automatique, objectifs, conseils personnalisés.</p>
+                
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="box info">
+                        <p><strong>📱 PLATEFORME</strong></p>
+                        <p>Application mobile</p>
+                    </div>
+                    <div class="box success">
+                        <p><strong>💡 POURQUOI C'EST INTÉRESSANT</strong></p>
+                        <p>Point de douleur universel. Utilisateurs = vos pairs. Très bon pour le portfolio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="theme-card">
+                <div class="theme-number">4</div>
+                <h2>PLATEFORME DE CO-PROGRAMMATION &amp; MENTORAT</h2>
+                
+                <h3>😤 LE PROBLÈME</h3>
+                <p>Débutants galèrent à trouver de l'aide. Seniors aimeraient partager mais manquent de structure. Pas de plateforme dédiée.</p>
+                
+                <h3>👥 UTILISATEURS</h3>
+                <ul>
+                    <li>Développeurs débutants cherchant aide</li>
+                    <li>Développeurs seniors partageant connaissances</li>
+                    <li>Responsables techniques gérant montée en compétence</li>
+                </ul>
+                
+                <h3>🎯 MISSION</h3>
+                <p>Plateforme de jumelage et sessions de programmation 
+en binôme. Jumelage par compétences, planification, collaboration en 
+temps réel.</p>
+                
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="box info">
+                        <p><strong>💻 PLATEFORME</strong></p>
+                        <p>Web</p>
+                    </div>
+                    <div class="box success">
+                        <p><strong>💡 POURQUOI C'EST INTÉRESSANT</strong></p>
+                        <p>Communauté tech engagée. Problème réel. Innovant.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="theme-card">
+                <div class="theme-number">5</div>
+                <h2>APPLI DE RÉSEAUTAGE POUR ÉVÉNEMENTS TECH</h2>
+                
+                <h3>😤 LE PROBLÈME</h3>
+                <p>Difficile de réseauter efficacement en conférence/rencontre. Qui rencontrer ? Comment rester en contact après ?</p>
+                
+                <h3>👥 UTILISATEURS</h3>
+                <ul>
+                    <li>Participants conférences/rencontres</li>
+                    <li>Organisateurs d'événements</li>
+                    <li>Conférenciers</li>
+                </ul>
+                
+                <h3>🎯 MISSION</h3>
+                <p>Application mobile pour faciliter réseautage lors 
+d'événements tech. Jumelage centres d'intérêt, planification rencontres,
+ suivi post-événement.</p>
+                
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="box info">
+                        <p><strong>📱 PLATEFORME</strong></p>
+                        <p>Application mobile</p>
+                    </div>
+                    <div class="box success">
+                        <p><strong>💡 POURQUOI C'EST INTÉRESSANT</strong></p>
+                        <p>Vous allez tous à des rencontres. Test accessible. Amusant et utile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <div class="theme-card">
+                <div class="theme-number">6</div>
+                <h2>APPLI DE COACHING SPORTIF PERSONNALISÉ</h2>
+                
+                <h3>😤 LE PROBLÈME</h3>
+                <p>Applications sport (Nike Training, MyFitnessPal) = 
+trop génériques. Pas de vraie personnalisation selon niveau, objectifs, 
+contraintes.</p>
+                
+                <h3>👥 UTILISATEURS</h3>
+                <ul>
+                    <li>Débutant qui veut se mettre au sport</li>
+                    <li>Sportif régulier qui veut progresser</li>
+                    <li>Athlète qui veut optimiser</li>
+                </ul>
+                
+                <h3>🎯 MISSION</h3>
+                <p>Application de coaching sportif vraiment adaptatif. Programmes personnalisés, progression intelligente, nutrition.</p>
+                
+                <div class="two-columns" style="margin-top: 20px;">
+                    <div class="box info">
+                        <p><strong>📱 PLATEFORME</strong></p>
+                        <p>Application mobile</p>
+                    </div>
+                    <div class="box success">
+                        <p><strong>💡 POURQUOI C'EST INTÉRESSANT</strong></p>
+                        <p>Tout le monde fait du sport. Diversifie des sujets 100% tech.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Constitution équipes -->
+        <div class="slide center">
+            <h1 style="font-size: 3.5em;">👥</h1>
+            <h2>FORMATION DES ÉQUIPES</h2>
+            <div class="box warning" style="margin-top: 60px; text-align: left;">
+                <h3>📋 Instructions</h3>
+                <ul style="font-size: 1.2em;">
+                    <li><strong>Équipes de 3-4 personnes</strong></li>
+                    <li>Choisissez UN thème parmi les 6</li>
+                    <li>Vous travaillerez sur ce projet jusqu'en février 2026</li>
+                    <li>Équipes mixtes encouragées (compétences variées)</li>
+                </ul>
+            </div>
+            <div class="box info" style="margin-top: 30px;">
+                <p style="font-size: 1.3em; margin: 0;"><strong>⏱️ Vous avez 15 minutes</strong></p>
+                <p style="margin-top: 10px;">Discutez, choisissez votre thème, formez vos équipes</p>
+            </div>
+        </div>
+
+        <!-- Slide 15: Ce que vous allez produire -->
+        <div class="slide">
+            <h2>📦 CE QUE VOUS ALLEZ LIVRER EN FÉVRIER 2026</h2>
+            <div class="box danger center">
+                <p style="font-size: 1.3em; margin: 0;"><strong>🎯 PRÉSENTATION FINALE : 20 minutes par équipe</strong></p>
+            </div>
+            <div class="three-columns" style="margin-top: 30px;">
+                <div class="card" style="background: #fff3cd; border-left-color: #ffc107;">
+                    <h4>📊 1. RECHERCHE</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Rapport de recherche</li>
+                        <li>Profils utilisateurs</li>
+                        <li>Enseignements clés</li>
+                        <li>Analyse concurrence</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: #e3f2fd; border-left-color: #17a2b8;">
+                    <h4>🎨 2. CONCEPTION</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Maquettes basse fidélité</li>
+                        <li>Maquettes haute fidélité</li>
+                        <li>Prototype interactif</li>
+                        <li>Guide de style</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: #d4edda; border-left-color: #28a745;">
+                    <h4>✅ 3. TESTS</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Tests utilisateurs</li>
+                        <li>Retours collectés</li>
+                        <li>Itérations effectuées</li>
+                        <li>Recommandations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box success" style="margin-top: 30px;">
+                <h3>🎁 Ce que vous aurez à la fin</h3>
+                <ul style="font-size: 1.1em;">
+                    <li>✅ Un projet complet pour votre portfolio</li>
+                    <li>✅ Une expérience concrète du processus UX/UI</li>
+                    <li>✅ Des compétences recherchées par les employeurs</li>
+                    <li>✅ Un cas d'étude à présenter en entretien</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 16: Pause -->
+        <div class="slide center">
+            <h1 style="font-size: 5em;">☕</h1>
+            <h2>PAUSE</h2>
+            <p style="font-size: 1.5em; margin-top: 60px;">15 minutes</p>
+            <p style="font-size: 1.2em; margin-top: 30px;">On se retrouve à 10h00 pour la partie RECHERCHE</p>
+        </div>
+
+        <!-- Slide 17: Le processus de recherche -->
+        <div class="slide">
+            <h2>🔬 LE PROCESSUS DE RECHERCHE UX</h2>
+            <div class="process-flow" style="flex-direction: column;">
+                <div class="process-step" style="width: 80%; background: #fff3cd;">
+                    <div class="icon">❓</div>
+                    <h4>1️⃣ DÉFINIR LES QUESTIONS DE RECHERCHE</h4>
+                    <p>Qu'est-ce qu'on cherche à comprendre ?</p>
+                </div>
+                <div style="font-size: 2em; color: #667eea; margin: 10px 0;">↓</div>
+                <div class="process-step" style="width: 80%; background: #e3f2fd;">
+                    <div class="icon">🔍</div>
+                    <h4>2️⃣ CHOISIR LES MÉTHODES</h4>
+                    <p>Entretiens ? Observation ? Analyse concurrence ?</p>
+                </div>
+                <div style="font-size: 2em; color: #667eea; margin: 10px 0;">↓</div>
+                <div class="process-step" style="width: 80%; background: #d4edda;">
+                    <div class="icon">👥</div>
+                    <h4>3️⃣ RECRUTER &amp; COLLECTER</h4>
+                    <p>Parler aux vrais utilisateurs</p>
+                </div>
+                <div style="font-size: 2em; color: #667eea; margin: 10px 0;">↓</div>
+                <div class="process-step" style="width: 80%; background: #f3e5f5;">
+                    <div class="icon">📊</div>
+                    <h4>4️⃣ ANALYSER &amp; SYNTHÉTISER</h4>
+                    <p>Trouver les tendances et enseignements</p>
+                </div>
+                <div style="font-size: 2em; color: #667eea; margin: 10px 0;">↓</div>
+                <div class="process-step" style="width: 80%; background: #ffd93d;">
+                    <div class="icon">📋</div>
+                    <h4>5️⃣ CRÉER LES LIVRABLES</h4>
+                    <p>Profils utilisateurs, Parcours, Enseignements...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 18: Recherche allégée -->
+        <div class="slide">
+            <h2>📊 VOTRE APPROCHE : RECHERCHE ALLÉGÉE</h2>
+            <div class="box warning center">
+                <p style="font-size: 1.3em;"><strong>⏰ CONTRAINTE : Vous avez 3 semaines, pas 3 mois</strong></p>
+            </div>
+            <div class="two-columns">
+                <div class="box danger">
+                    <h3>❌ PAS LE TEMPS POUR :</h3>
+                    <ul>
+                        <li>Recruter des utilisateurs</li>
+                        <li>Organiser 8 entretiens</li>
+                        <li>Créer des questionnaires en ligne</li>
+                        <li>Attendre les réponses</li>
+                        <li>Analyser des dizaines d'heures d'enregistrements</li>
+                    </ul>
+                </div>
+                <div class="box success">
+                    <h3>✅ CE QUE VOUS ALLEZ FAIRE :</h3>
+                    <ul>
+                        <li><strong>RECHERCHE DOCUMENTAIRE intensive</strong></li>
+                        <li>2-3 entretiens informels rapides</li>
+                        <li>Analyse de la concurrence</li>
+                        <li>Extraction d'avis utilisateurs</li>
+                        <li>Analyse Reddit/forums</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box info center" style="margin-top: 30px;">
+                <p style="font-size: 1.3em;"><strong>🎯 PHILOSOPHIE : Maximum d'enseignements en minimum de temps</strong></p>
+                <p>Vous êtes en mode jeune pousse : allégé, rapide, efficace.</p>
+            </div>
+        </div>
+
+        <!-- Slide 19: Les méthodes de recherche -->
+        <div class="slide">
+            <h2>🔍 VOS MÉTHODES DE RECHERCHE (PRIORISÉES)</h2>
+            <div class="three-columns">
+                <div class="card" style="background: #d4edda; border-left-color: #28a745;">
+                    <div class="icon" style="font-size: 2.5em;">🔍</div>
+                    <h4>RECHERCHE DOCUMENTAIRE</h4>
+                    <p><strong>Quoi :</strong> Analyse documents existants, études, articles</p>
+                    <p><strong>Durée :</strong> 4-6h</p>
+                    <p><strong>Priorité :</strong> ⭐⭐⭐⭐⭐</p>
+                    <p style="margin-top: 10px; background: #28a745; color: white; padding: 10px; border-radius: 5px;"><strong>VOTRE PRIORITÉ #1</strong></p>
+                </div>
+                <div class="card" style="background: #e8f5e9;">
+                    <div class="icon" style="font-size: 2.5em;">🏆</div>
+                    <h4>ANALYSE CONCURRENCE</h4>
+                    <p><strong>Quoi :</strong> Analyser concurrents + avis</p>
+                    <p><strong>Durée :</strong> 3-4h</p>
+                    <p><strong>Priorité :</strong> ⭐⭐⭐⭐⭐</p>
+                    <p style="margin-top: 10px; background: #28a745; color: white; padding: 10px; border-radius: 5px;"><strong>VOTRE PRIORITÉ #1</strong></p>
+                </div>
+                <div class="card" style="background: #fff3cd;">
+                    <div class="icon" style="font-size: 2.5em;">💬</div>
+                    <h4>EXTRACTION AVIS</h4>
+                    <p><strong>Quoi :</strong> Analyser avis magasins d'applications, Reddit, forums</p>
+                    <p><strong>Durée :</strong> 2-3h</p>
+                    <p><strong>Priorité :</strong> ⭐⭐⭐⭐⭐</p>
+                    <p style="margin-top: 10px; background: #28a745; color: white; padding: 10px; border-radius: 5px;"><strong>VOTRE PRIORITÉ #1</strong></p>
+                </div>
+            </div>
+            <div class="two-columns" style="margin-top: 20px;">
+                <div class="card" style="background: #e3f2fd;">
+                    <div class="icon" style="font-size: 2.5em;">👥</div>
+                    <h4>ENTRETIENS RAPIDES</h4>
+                    <p><strong>Quoi :</strong> 2-3 conversations informelles 15-20min</p>
+                    <p><strong>Durée :</strong> 1-2h total</p>
+                    <p><strong>Priorité :</strong> ⭐⭐⭐</p>
+                    <p style="margin-top: 10px;">Bonus si possible</p>
+                </div>
+                <div class="card" style="background: #f5f5f5; opacity: 0.5;">
+                    <div class="icon" style="font-size: 2.5em;">📋</div>
+                    <h4>QUESTIONNAIRES</h4>
+                    <p><strong>Quoi :</strong> Sondages en ligne</p>
+                    <p><strong>Priorité :</strong> ⭐</p>
+                    <p style="margin-top: 10px; background: #dc3545; color: white; padding: 10px; border-radius: 5px;"><strong>PAS POUR VOUS</strong></p>
+                    <p style="font-size: 0.9em;">Trop long</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 20: Recherche documentaire -->
+        <div class="slide">
+            <h2>🔍 RECHERCHE DOCUMENTAIRE - VOTRE ARME PRINCIPALE</h2>
+            <div class="box success">
+                <h3>✅ Pourquoi c'est parfait pour vous</h3>
+                <ul>
+                    <li><strong>Rapide :</strong> 4-6h pour avoir une vision complète</li>
+                    <li><strong>Gratuit :</strong> Tout est en ligne</li>
+                    <li><strong>Pas de recrutement :</strong> Aucune dépendance externe</li>
+                    <li><strong>Riche :</strong> Des milliers d'enseignements disponibles</li>
+                    <li><strong>Actuel :</strong> Données récentes</li>
+                </ul>
+            </div>
+            <div class="two-columns">
+                <div class="box info">
+                    <h3>📚 OÙ CHERCHER ?</h3>
+                    <h4>ARTICLES &amp; ÉTUDES</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Medium (UX Collective)</li>
+                        <li>Nielsen Norman Group</li>
+                        <li>Études sectorielles</li>
+                        <li>Statista (statistiques)</li>
+                    </ul>
+                    <h4>COMMUNAUTÉS</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Reddit (forums spécialisés)</li>
+                        <li>Product Hunt (discussions)</li>
+                        <li>LinkedIn (posts d'experts)</li>
+                        <li>Forums spécialisés</li>
+                    </ul>
+                </div>
+                <div class="box warning">
+                    <h3>💬 AVIS UTILISATEURS</h3>
+                    <h4>MAGASINS D'APPLICATIONS</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Apple App Store (avis)</li>
+                        <li>Google Play Store</li>
+                        <li>Filtrer par notes 1-2⭐ (problèmes)</li>
+                    </ul>
+                    <h4>SITES D'AVIS</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>G2.com (logiciels professionnels)</li>
+                        <li>Capterra</li>
+                        <li>Trustpilot</li>
+                    </ul>
+                    <h4>FORUMS</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Stack Overflow</li>
+                        <li>Forums spécialisés</li>
+                        <li>Communautés Discord</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 21: Extraction avis -->
+        <div class="slide">
+            <h2>💬 EXTRACTION AVIS - LA MINE D'OR</h2>
+            <div class="box success">
+                <h3>✅ Pourquoi c'est génial</h3>
+                <ul>
+                    <li>Les utilisateurs sont BRUTALEMENT honnêtes dans les avis</li>
+                    <li>Ils expriment leurs vrais points de douleur</li>
+                    <li>Vous avez des milliers de "mini-entretiens" gratuits</li>
+                    <li>Vous voyez ce qui fonctionne ET ce qui ne fonctionne pas</li>
+                </ul>
+            </div>
+            <div class="two-columns">
+                <div class="card" style="background: #e8f5e9;">
+                    <h4>✅ Quoi chercher dans les avis ?</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li><strong>Points de douleur :</strong> "Je déteste que..."</li>
+                        <li><strong>Manques :</strong> "Il manque..."</li>
+                        <li><strong>Comparaisons :</strong> "Contrairement à X..."</li>
+                        <li><strong>Cas d'usage :</strong> "J'utilise ça pour..."</li>
+                        <li><strong>Abandons :</strong> "J'ai désinstallé car..."</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: #fff3cd;">
+                    <h4>🎯 Stratégie</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li><strong>Filtrer par 1-2⭐</strong> (vrais problèmes)</li>
+                        <li><strong>Filtrer par 5⭐</strong> (ce qui plaît)</li>
+                        <li>Ignorer les 3-4⭐ (moyens, peu d'infos)</li>
+                        <li>Chercher avis <strong>longs et détaillés</strong></li>
+                        <li>Noter les tendances récurrentes</li>
+                        <li>Copier-coller les meilleures citations</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box info">
+                <h3>💡 Exemple concret (Application Budget)</h3>
+                <p style="font-style: italic; background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    ⭐⭐ Avis App Store - "J'ai essayé pendant 2 semaines 
+mais trop compliqué. Il faut catégoriser chaque dépense manuellement, ça
+ prend 10 min par jour. J'ai arrêté. Dommage car le tableau de bord 
+était beau."
+                </p>
+                <p style="margin-top: 15px;"><strong>→ Point de douleur identifié :</strong> Catégorisation manuelle = friction majeure</p>
+                <p><strong>→ Enseignement :</strong> Il faut de l'auto-catégorisation intelligente</p>
+                <p><strong>→ Ce qui marche :</strong> Tableau de bord visuel apprécié</p>
+            </div>
+        </div>
+
+        <!-- Slide 22: Cadre questions de recherche -->
+        <div class="slide">
+            <h2>❓ CADRE : DÉFINIR VOS QUESTIONS DE RECHERCHE</h2>
+            <div class="box info">
+                <h3>🎯 Une bonne question de recherche est :</h3>
+                <ul style="font-size: 1.1em;">
+                    <li><strong>Spécifique</strong> : Pas vague, mais précise</li>
+                    <li><strong>Actionnable</strong> : La réponse guidera votre conception</li>
+                    <li><strong>Centrée utilisateur</strong> : Focus sur les besoins, pas la solution</li>
+                    <li><strong>Ouverte</strong> : Commence par "Comment", "Pourquoi", "Quels"</li>
+                </ul>
+            </div>
+
+            <div class="box success">
+                <h3>📋 LES 4 CATÉGORIES DE QUESTIONS</h3>
+                
+                <div class="card" style="background: #fff3cd; margin: 20px 0;">
+                    <h4>1️⃣ COMPRENDRE LE CONTEXTE</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Qui sont les utilisateurs ? (âge, profession, niveau tech)</li>
+                        <li>Dans quel environnement utilisent-ils les solutions actuelles ?</li>
+                        <li>À quelle fréquence rencontrent-ils ce problème ?</li>
+                        <li>Quelles sont leurs compétences techniques ?</li>
+                    </ul>
+                    <p style="background: white; padding: 10px; border-radius: 5px; margin-top: 10px; font-style: italic;">
+                        <strong>Exemple :</strong> "Dans quels contextes les jeunes actifs essaient-ils de gérer leur budget ?"
+                    </p>
+                </div>
+
+                <div class="card" style="background: #f8d7da; margin: 20px 0;">
+                    <h4>2️⃣ IDENTIFIER LES POINTS DE DOULEUR</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Quelles sont leurs frustrations principales ?</li>
+                        <li>Qu'est-ce qui les empêche d'atteindre leurs objectifs ?</li>
+                        <li>Quels obstacles rencontrent-ils régulièrement ?</li>
+                        <li>Qu'est-ce qui les fait abandonner les solutions actuelles ?</li>
+                    </ul>
+                    <p style="background: white; padding: 10px; border-radius: 5px; margin-top: 10px; font-style: italic;">
+                        <strong>Exemple :</strong> "Quels sont les 3 principaux obstacles qui empêchent les développeurs de gérer efficacement leurs projets ?"
+                    </p>
+                </div>
+
+                <div class="card" style="background: #e3f2fd; margin: 20px 0;">
+                    <h4>3️⃣ DÉCOUVRIR LES COMPORTEMENTS ACTUELS</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Comment font-ils actuellement pour résoudre ce problème ?</li>
+                        <li>Quels outils/méthodes utilisent-ils aujourd'hui ?</li>
+                        <li>Pourquoi ont-ils choisi ces solutions ?</li>
+                        <li>Quelles sont leurs stratégies de contournement ?</li>
+                    </ul>
+                    <p style="background: white; padding: 10px; border-radius: 5px; margin-top: 10px; font-style: italic;">
+                        <strong>Exemple :</strong> "Comment les équipes tech s'organisent-elles actuellement sans outil adapté ?"
+                    </p>
+                </div>
+
+                <div class="card" style="background: #d4edda; margin: 20px 0;">
+                    <h4>4️⃣ EXPLORER LES BESOINS NON SATISFAITS</h4>
+                    <ul style="font-size: 0.95em;">
+                        <li>Qu'est-ce qui leur manque dans les solutions actuelles ?</li>
+                        <li>Quelles fonctionnalités souhaiteraient-ils avoir ?</li>
+                        <li>Qu'est-ce qui les aiderait vraiment au quotidien ?</li>
+                        <li>Que cherchent-ils sans le trouver ?</li>
+                    </ul>
+                    <p style="background: white; padding: 10px; border-radius: 5px; margin-top: 10px; font-style: italic;">
+                        <strong>Exemple :</strong> "Quelles fonctionnalités manquent aux applications de budget actuelles pour les rendre vraiment utiles au quotidien ?"
+                    </p>
+                </div>
+            </div>
+
+            <div class="box danger">
+                <h3>❌ Questions à ÉVITER</h3>
+                <ul>
+                    <li>"Est-ce que vous aimeriez une application pour X ?" → Valide une solution, pas un besoin</li>
+                    <li>"Pensez-vous que c'est bien ?" → Demande un avis, pas des faits</li>
+                    <li>"Les gens font-ils X ?" → Trop vague, pas spécifique</li>
+                    <li>"Utiliseriez-vous cette fonctionnalité ?" → Les gens ne savent pas ce qu'ils feront</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 23: Atelier pratique - Définir questions -->
+        <div class="slide">
+            <h2>💡 ATELIER PRATIQUE : VOS QUESTIONS DE RECHERCHE</h2>
+            <div class="box warning center">
+                <p style="font-size: 1.3em;"><strong>⏱️ 30 MINUTES EN ÉQUIPE</strong></p>
+            </div>
+            
+            <div class="box info">
+                <h3>📝 VOTRE MISSION</h3>
+                <p style="font-size: 1.2em;"><strong>Formulez 3-5 questions de recherche pour votre thème</strong></p>
+                <p style="margin-top: 15px;">Essayez d'avoir AU MOINS :</p>
+                <ul style="font-size: 1.05em; margin-top: 10px;">
+                    <li>✅ 1 question sur le CONTEXTE</li>
+                    <li>✅ 1-2 questions sur les POINTS DE DOULEUR</li>
+                    <li>✅ 1 question sur les COMPORTEMENTS ACTUELS</li>
+                    <li>✅ 1 question sur les BESOINS NON SATISFAITS</li>
+                </ul>
+            </div>
+
+            <div class="box success">
+                <h3>💡 EXEMPLE COMPLET : Application Budget pour Jeunes Actifs</h3>
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 15px;">
+                    <p style="margin-bottom: 15px;"><strong>1. CONTEXTE</strong><br>
+                    "Dans quelles situations les jeunes actifs 25-35 ans essaient-ils de gérer leur budget ?"</p>
+                    
+                    <p style="margin-bottom: 15px;"><strong>2. POINTS DE DOULEUR</strong><br>
+                    "Quels sont les 3 principaux obstacles qui empêchent
+ les jeunes actifs de suivre leur budget régulièrement ?"<br>
+                    "Pourquoi abandonnent-ils les applications de gestion de budget ?"</p>
+                    
+                    <p style="margin-bottom: 15px;"><strong>3. COMPORTEMENTS ACTUELS</strong><br>
+                    "Comment les jeunes actifs gèrent-ils actuellement leur budget sans application dédiée ?"</p>
+                    
+                    <p><strong>4. BESOINS NON SATISFAITS</strong><br>
+                    "Quelles fonctionnalités manquent aux applications actuelles pour les rendre vraiment utiles au quotidien ?"</p>
+                </div>
+            </div>
+
+            <div class="box warning" style="margin-top: 20px;">
+                <p style="font-size: 1.1em;"><strong>💡 Conseil :</strong>
+ Relisez vos questions et demandez-vous : "Est-ce que la réponse à cette
+ question m'aidera vraiment à concevoir une meilleure solution ?" Si 
+non, reformulez !</p>
+            </div>
+        </div>
+
+        <!-- Slide 24: Atelier - Identifier sources -->
+        <div class="slide">
+            <h2>🔍 ATELIER : OÙ CHERCHER VOS INFORMATIONS ?</h2>
+            <div class="box warning center">
+                <p style="font-size: 1.3em;"><strong>⏱️ 20 MINUTES EN ÉQUIPE</strong></p>
+            </div>
+            <div class="box info">
+                <h3>📝 VOTRE MISSION</h3>
+                <p style="font-size: 1.2em;">Listez au moins 10 sources concrètes pour votre recherche</p>
+            </div>
+            <div class="three-columns" style="margin-top: 30px;">
+                <div class="card" style="background: #fff3cd;">
+                    <h4>🏆 CONCURRENTS</h4>
+                    <p><strong>Identifiez 5-7 solutions existantes</strong></p>
+                    <ul style="font-size: 0.95em; margin-top: 10px;">
+                        <li>Applications directes</li>
+                        <li>Solutions alternatives</li>
+                        <li>Où sont leurs avis ?</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: #e3f2fd;">
+                    <h4>📚 ARTICLES</h4>
+                    <p><strong>Où trouver du contexte ?</strong></p>
+                    <ul style="font-size: 0.95em; margin-top: 10px;">
+                        <li>Études de marché</li>
+                        <li>Articles spécialisés</li>
+                        <li>Rapports sectoriels</li>
+                    </ul>
+                </div>
+                <div class="card" style="background: #d4edda;">
+                    <h4>💬 COMMUNAUTÉS</h4>
+                    <p><strong>Où les utilisateurs discutent ?</strong></p>
+                    <ul style="font-size: 0.95em; margin-top: 10px;">
+                        <li>Forums Reddit</li>
+                        <li>Groupes LinkedIn</li>
+                        <li>Forums spécialisés</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="box success" style="margin-top: 30px;">
+                <h3>✅ Exemple pour "Application Budget"</h3>
+                <ul style="font-size: 1em;">
+                    <li>Concurrents : Bankin', Linxo, YNAB, Mint, PocketGuard</li>
+                    <li>Avis : App Store (3000+ avis), Google Play, Trustpilot</li>
+                    <li>Forums : r/personalfinance, r/frugal, forum Boursorama</li>
+                    <li>Articles : Études Statista sur gestion budget 25-35 ans</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 24: Atelier - Plan d'action -->
+        <div class="slide">
+            <h2>📅 ATELIER : VOTRE PLAN D'ACTION</h2>
+            <div class="box warning center">
+                <p style="font-size: 1.3em;"><strong>⏱️ 30 MINUTES EN ÉQUIPE</strong></p>
+            </div>
+            <div class="box info">
+                <h3>📝 CRÉEZ VOTRE FEUILLE DE ROUTE</h3>
+                <p style="font-size: 1.2em;">Qui fait quoi ? Sur 3 semaines</p>
+            </div>
+            <div class="card" style="background: #fff3cd; padding: 30px; margin: 30px 0;">
+                <h3 style="margin-top: 0;">🗓️ SEMAINE 1 (18/11 - 24/11)</h3>
+                <ul style="font-size: 1.1em;">
+                    <li>📊 Recherche documentaire (4-6h) - Qui ?</li>
+                    <li>🏆 Analyse concurrence (3-4h) - Qui ?</li>
+                    <li>💬 Extraction avis (50-100 avis) - Qui ?</li>
+                </ul>
+                <p style="margin-top: 15px; padding: 15px; background: white; border-radius: 8px;"><strong>Livrable :</strong> Notes brutes + tableau concurrence</p>
+            </div>
+            <div class="card" style="background: #e3f2fd; padding: 30px; margin: 30px 0;">
+                <h3 style="margin-top: 0;">🗓️ SEMAINE 2 (25/11 - 01/12)</h3>
+                <ul style="font-size: 1.1em;">
+                    <li>📊 Synthèse &amp; Analyse (3-4h) - Qui ?</li>
+                    <li>👤 Création profils utilisateurs (2-3h) - Qui ?</li>
+                    <li>💡 Formulation enseignements clés - Qui ?</li>
+                </ul>
+                <p style="margin-top: 15px; padding: 15px; background: white; border-radius: 8px;"><strong>Livrable :</strong> Top 5-7 enseignements + profils</p>
+            </div>
+            <div class="card" style="background: #d4edda; padding: 30px; margin: 30px 0;">
+                <h3 style="margin-top: 0;">🗓️ SEMAINE 3 (02/12 - 09/12)</h3>
+                <ul style="font-size: 1.1em;">
+                    <li>📄 Rapport de recherche final (2-3h) - Qui ?</li>
+                    <li>🎯 Énoncé du problème - Qui ?</li>
+                    <li>📊 Préparation présentation - Ensemble</li>
+                </ul>
+                <p style="margin-top: 15px; padding: 15px; background: white; border-radius: 8px;"><strong>Livrable :</strong> Rapport complet + Présentation</p>
+            </div>
+        </div>
+
+        <!-- Slide 25: Template à remplir -->
+        <div class="slide">
+            <h2>📋 DOCUMENT À REMPLIR AUJOURD'HUI</h2>
+            <div class="box warning center">
+                <p style="font-size: 1.3em;"><strong>🎯 À rendre avant de partir</strong></p>
+            </div>
+            <div style="background: #2d2d2d; color: #f8f8f2; padding: 30px; border-radius: 10px; font-size: 0.95em; line-height: 1.8;">
+                <p style="color: #6a9955;">// ÉQUIPE</p>
+                <p>Nom de l'équipe :</p>
+                <p>Membres : [Nom 1], [Nom 2], [Nom 3], [Nom 4]</p>
+                <p>Thème choisi : [Numéro + Nom]</p>
+                
+                <p style="color: #6a9955; margin-top: 20px;">// QUESTIONS DE RECHERCHE (3-5)</p>
+                <p>1. [Question 1]</p>
+                <p>2. [Question 2]</p>
+                <p>3. [Question 3]</p>
+                <p>4. [Question 4]</p>
+                <p>5. [Question 5]</p>
+                
+                <p style="color: #6a9955; margin-top: 20px;">// SOURCES IDENTIFIÉES (minimum 10)</p>
+                <p><strong>Concurrents (5-7) :</strong></p>
+                <p>• [Concurrent 1]</p>
+                <p>• [Concurrent 2]</p>
+                <p>• ...</p>
+                
+                <p style="margin-top: 15px;"><strong>Avis utilisateurs :</strong></p>
+                <p>• [Source 1 - ex: App Store Application X]</p>
+                <p>• [Source 2 - ex: Reddit r/...] </p>
+                
+                <p style="margin-top: 15px;"><strong>Articles / Études :</strong></p>
+                <p>• [Article 1]</p>
+                <p>• [Étude 2]</p>
+                
+                <p style="color: #6a9955; margin-top: 20px;">// RÉPARTITION DU TRAVAIL</p>
+                <p><strong>Semaine 1 :</strong></p>
+                <p>• Recherche documentaire : [Nom]</p>
+                <p>• Analyse concurrence : [Nom]</p>
+                <p>• Extraction avis : [Nom]</p>
+                
+                <p style="margin-top: 15px;"><strong>Semaine 2 :</strong></p>
+                <p>• Synthèse : [Nom]</p>
+                <p>• Profils utilisateurs : [Nom]</p>
+                
+                <p style="margin-top: 15px;"><strong>Semaine 3 :</strong></p>
+                <p>• Rapport final : [Nom]</p>
+            </div>
+        </div>
+
+        <!-- Slide 26: Conclusion -->
+        <div class="slide center intro-slide">
+            <h1 style="font-size: 5em;">🎯</h1>
+            <h2>C'EST PARTI !</h2>
+            <div class="box success" style="margin-top: 60px;">
+                <h3>Vous repartez avec :</h3>
+                <ul style="text-align: left; font-size: 1.3em; margin-left: 40px;">
+                    <li>✅ Votre équipe et votre thème</li>
+                    <li>✅ Vos questions de recherche</li>
+                    <li>✅ Vos sources identifiées</li>
+                    <li>✅ Votre plan d'action sur 3 semaines</li>
+                </ul>
+            </div>
+            <div class="box warning" style="margin-top: 40px;">
+                <p style="font-size: 1.3em; margin: 0;">
+                    <strong>📧 Point d'étape obligatoire</strong>
+                </p>
+                <p style="font-size: 1.1em; margin-top: 15px;">
+                    Fin de semaine 2 : Envoyez-moi vos premiers enseignements
+                </p>
+            </div>
+            <p style="font-size: 1.5em; margin-top: 60px; color: #667eea;">
+                <strong>Rendez-vous en décembre pour la phase DÉFINIR !</strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled="disabled">← Précédent</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            
+            currentSlide = (n + totalSlides) % totalSlides;
+            
+            slides[currentSlide].classList.add('active');
+            
+            updateSlideNumber();
+            updateButtons();
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        function updateSlideNumber() {
+            document.getElementById('slideNumber').textContent = `${currentSlide + 1} / ${totalSlides}`;
+        }
+
+        function updateButtons() {
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        // Navigation au clavier
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                changeSlide(-1);
+            } else if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+                changeSlide(1);
+            }
+        });
+
+        // Initialisation
+        updateSlideNumber();
+        updateButtons();
+    </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
