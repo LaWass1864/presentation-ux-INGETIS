@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation Design - 17 Décembre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            overflow: hidden;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 60px 80px;
+            max-width: 1400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            display: none;
+        }
+        .slide.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .duration {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            background: #667eea;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #764ba2;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #667eea;
+            padding-bottom: 20px;
+        }
+        h3 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        p, li {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        ul {
+            margin-left: 40px;
+        }
+        .timeline-box {
+            background: #f8f9ff;
+            border-left: 6px solid #667eea;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .timeline-box h3 {
+            margin-top: 0;
+        }
+        .highlight {
+            background: #fff3cd;
+            padding: 25px;
+            border-left: 5px solid #ffc107;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .highlight strong {
+            color: #764ba2;
+        }
+        .session-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border: 3px solid #667eea;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        .example-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .example-box strong {
+            color: #2e7d32;
+        }
+        .pause-box {
+            background: #fff3cd;
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 25px 0;
+            font-size: 1.3em;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 40px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        .nav-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: #764ba2;
+            transform: scale(1.05);
+        }
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+        .slide-counter {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #667eea;
+            min-width: 80px;
+            text-align: center;
+        }
+        .icon {
+            font-size: 3em;
+            margin-right: 20px;
+        }
+        .row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- SLIDE 1 -->
+        <div class="slide active">
+            <div class="duration">15 min</div>
+            <h1>🎨 Formation Design Thinking</h1>
+            <p style="font-size: 1.5em; color: #764ba2; font-weight: bold;">De la Recherche à la Maquette</p>
+            <hr style="margin: 50px 0; border: none; border-top: 3px solid #667eea;">
+            
+            <div style="margin-top: 80px;">
+                <p style="font-size: 1.3em; margin-bottom: 40px;">📍 Mercredi 17 décembre</p>
+                <p style="font-size: 1.3em; margin-bottom: 40px;">✅ Vous avez complété: <strong>Recherche utilisateur</strong></p>
+                <p style="font-size: 1.3em;">🎯 Aujourd'hui: <strong>Définition → Idéation → Maquettes Papier</strong></p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+            <h2>📋 Programme de la Journée (7h)</h2>
+            
+            <h3>🌅 Matin (3h30)</h3>
+            <ul style="font-size: 1.4em; line-height: 2.2;">
+                <li>Introduction & contexte - <strong>15 min</strong></li>
+                <li>Comment créer votre problématique - <strong>20 min</strong></li>
+                <li>Définition du problème - <strong>25 min</strong></li>
+                <li>Les 5 questions (POV) - <strong>45 min</strong></li>
+                <li class="pause-box">☕ PAUSE - 15 min</li>
+                <li>Personas (1-2) - <strong>40 min</strong></li>
+                <li>Présentation personas - <strong>30 min</strong></li>
+            </ul>
+
+            <div class="pause-box" style="margin-top: 50px;">🍽️ PAUSE DÉJEUNER - 1h</div>
+
+            <h3>🌆 Après-midi (3h30)</h3>
+            <ul style="font-size: 1.4em; line-height: 2.2;">
+                <li>Idéation - Brainstorm - <strong>20 min</strong></li>
+                <li>Crazy 8s (8 idées en 8 min!) - <strong>8 min</strong></li>
+                <li>Pitch Express - <strong>10 min</strong></li>
+                <li>Sélection d'idées - <strong>30 min</strong></li>
+                <li class="pause-box">☕ PAUSE - 15 min</li>
+                <li>Maquettes papier - <strong>90 min</strong></li>
+                <li>Feedback entre groupes - <strong>45 min</strong></li>
+            </ul>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+            <div class="duration">20 min</div>
+            <h2>🎯 Comment Créer Votre Problématique</h2>
+            
+            <h3>Format de la problématique</h3>
+            <div class="session-box">
+                <p style="font-size: 1.4em; font-weight: bold; color: #667eea; margin-bottom: 25px;">
+                    "Comment pourrait-on [action] pour [utilisateur] afin de [bénéfice/résultat] ?"
+                </p>
+            </div>
+
+            <div class="example-box">
+                <p><strong>Exemple 1:</strong></p>
+                <p>"Comment pourrait-on <strong>simplifier la recherche de recettes</strong> pour <strong>les étudiants</strong> afin de <strong>cuisiner sainement avec un budget limité</strong> ?"</p>
+            </div>
+
+            <div class="example-box">
+                <p><strong>Exemple 2:</strong></p>
+                <p>"Comment pourrait-on <strong>faciliter le covoiturage</strong> pour <strong>les salariés d'une zone industrielle</strong> afin de <strong>réduire leurs coûts de transport quotidiens</strong> ?"</p>
+            </div>
+
+            <div class="example-box">
+                <p><strong>Exemple 3:</strong></p>
+                <p>"Comment pourrait-on <strong>aider à organiser les révisions</strong> pour <strong>les lycéens</strong> afin de <strong>mieux gérer leur stress avant les examens</strong> ?"</p>
+            </div>
+
+            <div class="highlight" style="margin-top: 40px;">
+                <strong>💡 Astuce:</strong> Une bonne problématique est spécifique, centrée sur l'utilisateur, et ouvre des possibilités de solutions!
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide">
+            <div class="duration">25 min</div>
+            <h2>1️⃣ Définition du Problème</h2>
+            
+            <h3>Qu'avez-vous découvert?</h3>
+            
+            <div style="margin-top: 30px;">
+                <div style="margin-bottom: 30px;">
+                    <strong style="color: #667eea; font-size: 1.4em;">🎯 Les vrais besoins</strong> des utilisateurs
+                    <div class="example-box">
+                        <strong>Exemple:</strong> "Les étudiants ont besoin de recettes rapides (moins de 20 min) car ils manquent de temps entre les cours et le travail"
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <strong style="color: #667eea; font-size: 1.4em;">😤 Les frustrations</strong> qu'ils rencontrent
+                    <div class="example-box">
+                        <strong>Exemple:</strong> "Ils trouvent que les recettes en ligne nécessitent trop d'ingrédients chers et peu courants"
+                    </div>
+                </div>
+                
+                <div style="margin-bottom: 30px;">
+                    <strong style="color: #667eea; font-size: 1.4em;">🔄 Les patterns</strong> qui reviennent
+                    <div class="example-box">
+                        <strong>Exemple:</strong> "80% des personnes interrogées utilisent leur téléphone pendant les courses, mais trouvent les apps trop compliquées"
+                    </div>
+                </div>
+                
+                <div>
+                    <strong style="color: #667eea; font-size: 1.4em;">💡 Les occasions</strong> à saisir
+                    <div class="example-box">
+                        <strong>Exemple:</strong> "Il n'existe pas d'app qui combine liste de courses ET recettes adaptées au budget étudiant"
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5 -->
+        <div class="slide">
+            <div class="duration">45 min</div>
+            <h2>2️⃣ Les 5 Questions - Point of View</h2>
+            
+            <h3>Formulez votre énoncé de conception</h3>
+
+            <div class="timeline-box">
+                <p><strong style="font-size: 1.3em;">❓ Qui</strong> sont les utilisateurs principaux?</p>
+                <div class="example-box" style="margin-top: 15px;">
+                    <strong>Exemple:</strong> "Les étudiants en première année d'université, vivant en résidence ou colocation, âgés de 18-22 ans"
+                </div>
+            </div>
+            
+            <div class="timeline-box">
+                <p><strong style="font-size: 1.3em;">❓ Quoi</strong> est le problème exact?</p>
+                <div class="example-box" style="margin-top: 15px;">
+                    <strong>Exemple:</strong> "Ils ne savent pas quoi cuisiner avec les ingrédients limités qu'ils ont"
+                </div>
+            </div>
+            
+            <div class="timeline-box">
+                <p><strong style="font-size: 1.3em;">❓ Où</strong> utilisent-ils votre solution?</p>
+                <div class="example-box" style="margin-top: 15px;">
+                    <strong>Exemple:</strong> "Dans leur petite cuisine étudiante et au supermarché pendant les courses"
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6 -->
+        <div class="slide">
+            <div class="duration">45 min</div>
+            <h2>2️⃣ Les 5 Questions (suite)</h2>
+            
+            <div class="timeline-box">
+                <p><strong style="font-size: 1.3em;">❓ Quand</strong> en ont-ils besoin?</p>
+                <div class="example-box" style="margin-top: 15px;">
+                    <strong>Exemple:</strong> "Le soir après les cours (18h-20h) quand ils sont fatigués, et le week-end quand ils font leurs courses"
+                </div>
+            </div>
+            
+            <div class="timeline-box">
+                <p><strong style="font-size: 1.3em;">❓ Pourquoi</strong> c'est important pour eux?</p>
+                <div class="example-box" style="margin-top: 15px;">
+                    <strong>Exemple:</strong> "Pour économiser de l'argent (budget serré), manger plus sainement, et développer leur autonomie en cuisine"
+                </div>
+            </div>
+
+            <div class="highlight" style="margin-top: 50px;">
+                <strong>📝 Résultat:</strong> Un énoncé clair comme<br/>
+                "Les [utilisateurs] ont besoin de [solution] pour [bénéfice]"
+            </div>
+        </div>
+
+        <!-- PAUSE SLIDE -->
+        <div class="slide">
+            <div class="duration">15 min</div>
+            <div style="text-align: center; padding: 150px 0;">
+                <h1 style="font-size: 6em; margin-bottom: 40px;">☕</h1>
+                <h2 style="border: none;">PAUSE</h2>
+                <p style="font-size: 2em; color: #666;">15 minutes</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 7 -->
+        <div class="slide">
+            <div class="duration">40 min</div>
+            <h2>3️⃣ Personas - 1 à 2 Profils</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Créez 1-2 personas détaillés basés sur votre recherche. Vous êtes en groupe, ça va aller vite!</p>
+
+            <div class="session-box">
+                <div class="row">
+                    <div class="icon">👤</div>
+                    <div style="flex: 1;">
+                        <h3 style="margin-top: 0;">Informations de base</h3>
+                        <ul style="margin-left: 0;">
+                            <li>Nom, âge, métier/études</li>
+                            <li>Contexte de vie</li>
+                        </ul>
+                        <div class="example-box" style="margin-top: 15px;">
+                            <strong>Exemple:</strong> "Marie, 19 ans, étudiante en L1 Psychologie. Vit en résidence universitaire avec kitchenette. Budget mensuel: 250€ pour nourriture."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8 -->
+        <div class="slide">
+            <div class="duration">40 min</div>
+            <h2>3️⃣ Personas (suite)</h2>
+
+            <div class="session-box">
+                <div class="row">
+                    <div class="icon">🎯</div>
+                    <div style="flex: 1;">
+                        <h3 style="margin-top: 0;">Besoins & Objectifs</h3>
+                        <ul style="margin-left: 0;">
+                            <li>Ce qu'il/elle veut réaliser</li>
+                            <li>Ses frustrations actuelles</li>
+                        </ul>
+                        <div class="example-box" style="margin-top: 15px;">
+                            <strong>Exemple:</strong> "Veut manger sainement sans se ruiner. Frustrée par les recettes trop compliquées."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="session-box">
+                <div class="row">
+                    <div class="icon">💭</div>
+                    <div style="flex: 1;">
+                        <h3 style="margin-top: 0;">Comportements & Préférences</h3>
+                        <ul style="margin-left: 0;">
+                            <li>Comment il/elle se comporte</li>
+                            <li>Ce qui l'influence</li>
+                        </ul>
+                        <div class="example-box" style="margin-top: 15px;">
+                            <strong>Exemple:</strong> "Utilise son téléphone pour tout. Regarde YouTube pour apprendre. Fait ses courses 1x/semaine le samedi."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9 -->
+        <div class="slide">
+            <div class="duration">30 min</div>
+            <h2>📢 Présentation des Personas</h2>
+            
+            <h3>Chaque groupe présente (5 min par groupe)</h3>
+            <ul style="font-size: 1.3em;">
+                <li>Présentez vos 1-2 personas</li>
+                <li>Expliquez pourquoi vous les avez créés ainsi</li>
+                <li>Montrez le lien avec votre recherche</li>
+            </ul>
+
+            <div class="highlight" style="margin-top: 60px;">
+                <strong style="font-size: 1.3em;">💡 Objectif:</strong> Tout le monde doit comprendre pour qui on conçoit la solution
+            </div>
+        </div>
+
+        <!-- PAUSE DÉJEUNER -->
+        <div class="slide">
+            <div class="duration">1h</div>
+            <div style="text-align: center; padding: 150px 0;">
+                <h1 style="font-size: 6em; margin-bottom: 40px;">🍽️</h1>
+                <h2 style="border: none;">PAUSE DÉJEUNER</h2>
+                <p style="font-size: 2em; color: #666;">1 heure</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 10 -->
+        <div class="slide">
+            <div class="duration">38 min</div>
+            <h2>4️⃣ Idéation - Générer des Solutions</h2>
+
+            <div class="timeline-box">
+                <h3 style="margin-top: 0;">🧠 Brainstorm (20 min)</h3>
+                <ul style="font-size: 1.3em;">
+                    <li>Toutes les idées sont valides</li>
+                    <li>Pas de jugement</li>
+                    <li>Quantité avant qualité</li>
+                    <li>Notez tout sur post-its</li>
+                </ul>
+            </div>
+
+            <div class="timeline-box" style="border-left-color: #ff6b6b;">
+                <h3 style="margin-top: 0; color: #ff6b6b;">⚡ Crazy 8s (8 min!)</h3>
+                <p style="font-weight: bold; color: #667eea; margin-bottom: 20px; font-size: 1.3em;">Le concept: Trouvez 8 SOLUTIONS différentes à votre problématique!</p>
+                <ul style="font-size: 1.3em;">
+                    <li><strong>Pliez une feuille A4 en 8 carrés</strong></li>
+                    <li><strong>8 solutions en 8 minutes</strong> - 1 solution par minute!</li>
+                    <li>Chaque carré = une façon différente de résoudre votre problème</li>
+                    <li>Dessinez rapidement vos idées (schémas, interfaces, concepts)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 11 -->
+        <div class="slide">
+            <div class="duration">38 min</div>
+            <h2>4️⃣ Idéation (suite)</h2>
+
+            <div class="timeline-box" style="border-left-color: #ff6b6b;">
+                <h3 style="margin-top: 0; color: #ff6b6b;">⚡ Crazy 8s - Conseils</h3>
+                <ul style="font-size: 1.3em;">
+                    <li>Ne réfléchissez pas trop, laissez venir les idées!</li>
+                    <li>Si vous bloquez: changez l'approche, la plateforme, la fonctionnalité principale</li>
+                </ul>
+                <div class="highlight" style="margin-top: 25px; background: #ffebee; border-color: #ff6b6b;">
+                    <strong style="color: #c62828; font-size: 1.3em;">⏱️ Règle d'or:</strong> Vous DEVEZ remplir les 8 carrés en 8 minutes. C'est volontairement rapide pour libérer votre créativité!
+                </div>
+            </div>
+
+            <div class="timeline-box">
+                <h3 style="margin-top: 0;">🎤 Pitch Express (10 min)</h3>
+                <ul style="font-size: 1.3em;">
+                    <li><strong>Chaque personne</strong> présente son meilleur carré (30 sec max)</li>
+                    <li>Les autres groupes écoutent attentivement</li>
+                    <li>À la fin, <strong>chaque groupe vote</strong> pour l'idée la plus créative d'un autre groupe</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 12 -->
+        <div class="slide">
+            <div class="duration">30 min</div>
+            <h2>✨ Sélection d'Idées</h2>
+            
+            <h3>Choisissez 1-2 idées à développer</h3>
+            
+            <div class="session-box">
+                <h3 style="margin-top: 0;">Critères de sélection:</h3>
+                <ul style="font-size: 1.3em;">
+                    <li><strong>Pertinence</strong> - Ça résout vraiment le problème?</li>
+                    <li><strong>Faisabilité</strong> - Peut-on le réaliser?</li>
+                    <li><strong>Impact</strong> - Quel bénéfice pour l'utilisateur?</li>
+                    <li><strong>Originalité</strong> - Différent de ce qui existe?</li>
+                </ul>
+            </div>
+
+            <div class="highlight" style="margin-top: 50px;">
+                <strong style="font-size: 1.3em;">📝 Justifiez votre choix!</strong><br/>
+                Notez pourquoi vous avez sélectionné cette solution plutôt qu'une autre
+            </div>
+        </div>
+
+        <!-- PAUSE SLIDE 2 -->
+        <div class="slide">
+            <div class="duration">15 min</div>
+            <div style="text-align: center; padding: 150px 0;">
+                <h1 style="font-size: 6em; margin-bottom: 40px;">☕</h1>
+                <h2 style="border: none;">PAUSE</h2>
+                <p style="font-size: 2em; color: #666;">15 minutes</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 13 -->
+        <div class="slide">
+            <div class="duration">90 min</div>
+            <h2>5️⃣ Maquettes Papier - Wireframing</h2>
+            
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Dessinez votre solution sur papier:</p>
+
+            <div class="session-box">
+                <h3 style="margin-top: 0;">📐 Qu'inclure?</h3>
+                <ul style="font-size: 1.3em;">
+                    <li><strong>Layout général</strong> - Où sont les éléments?</li>
+                    <li><strong>Hiérarchie</strong> - Qu'est-ce qui est important?</li>
+                    <li><strong>Navigation</strong> - Comment l'utilisateur se déplace?</li>
+                    <li><strong>Interactions clés</strong> - Qu'est-ce qui change au clic?</li>
+                    <li><strong>États différents</strong> - Avant/après une action</li>
+                </ul>
+            </div>
+
+            <div class="session-box" style="margin-top: 30px;">
+                <h3 style="margin-top: 0;">📱 Combien d'écrans?</h3>
+                <p style="font-size: 1.3em;">Minimum 3-5 écrans principaux qui montrent le parcours utilisateur complet</p>
+            </div>
+
+            <div class="highlight" style="margin-top: 40px;">
+                <strong style="font-size: 1.3em;">🎨 Le style n'a pas d'importance!</strong><br/>
+                <em style="font-size: 1.2em;">Les couleurs, typos, designs viennent plus tard. Focalisez-vous sur la structure et le fonctionnement.</em>
+            </div>
+        </div>
+
+        <!-- SLIDE 14 -->
+        <div class="slide">
+            <div class="duration">45 min</div>
+            <h2>6️⃣ Feedback & Itération</h2>
+            
+            <h3>Présentez à un autre groupe (20 min)</h3>
+            <ul style="font-size: 1.3em;">
+                <li>Expliquez votre problème & votre solution</li>
+                <li>Montrez vos maquettes papier (le parcours)</li>
+                <li>Recueillez les retours et notez-les</li>
+            </ul>
+
+            <h3>Questions à poser:</h3>
+            <ul style="font-size: 1.3em;">
+                <li>Est-ce que c'est clair?</li>
+                <li>Manque-t-il quelque chose d'important?</li>
+                <li>Y a-t-il une meilleure façon de le faire?</li>
+                <li>Quelle est votre première impression?</li>
+                <li>Est-ce que ça répond au problème de départ?</li>
+            </ul>
+
+            <div class="session-box" style="margin-top: 40px;">
+                <h3 style="margin-top: 0;">🔄 Amélioration (25 min)</h3>
+                <p style="font-size: 1.3em;">Prenez les retours et améliorez vos maquettes si nécessaire</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 15 -->
+        <div class="slide">
+            <h2>✅ Checklist de Fin de Journée</h2>
+            
+            <p style="margin-bottom: 40px; font-size: 1.3em;">À la fin de ce cours, vous devez avoir:</p>
+            
+            <ul style="font-size: 1.4em; line-height: 2;">
+                <li>✔️ Une problématique bien formulée</li>
+                <li>✔️ Une définition claire du problème</li>
+                <li>✔️ 5 questions répondues (POV)</li>
+                <li>✔️ 1-2 personas détaillés</li>
+                <li>✔️ 8 idées du Crazy 8s par personne</li>
+                <li>✔️ 1-2 idées sélectionnées et justifiées</li>
+                <li>✔️ 3-5 maquettes papier (wireframes)</li>
+                <li>✔️ Des retours d'autres groupes</li>
+                <li>✔️ Une version améliorée après feedback</li>
+            </ul>
+
+            <div class="highlight" style="margin-top: 50px; text-align: center;">
+                <strong style="font-size: 1.5em;">🚀 Prêts pour passer à Figma en janvier!</strong>
+            </div>
+        </div>
+
+        <!-- SLIDE 16 -->
+        <div class="slide">
+            <h2>📅 Suite du Parcours</h2>
+            
+            <div class="session-box">
+                <h3 style="margin-top: 0;">🎬 Session 4 - Janvier (7h)</h3>
+                <ul style="font-size: 1.3em;">
+                    <li><strong>Figma</strong> - Interface, arborescence, frames, grids</li>
+                    <li><strong>Composants & Variants</strong></li>
+                    <li><strong>Maquettes basse fidélité</strong> - Wireframes numériques</li>
+                    <li><strong>Maquettes haute fidélité</strong> - Design final</li>
+                    <li><strong>Design System</strong> - Cohérence &amp; réutilisabilité</li>
+                </ul>
+            </div>
+
+            <div class="session-box" style="margin-top: 40px;">
+                <h3 style="margin-top: 0;">🎯 Session 5 - Mars (7h)</h3>
+                <ul style="font-size: 1.3em;">
+                    <li>Finalisation & affinage</li>
+                    <li>Prototype/interactions avancées</li>
+                    <li>Préparation pour présentation/portfolio</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+        <span class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">16</span>
+        </span>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) { currentSlide = totalSlides; }
+            if (n < 1) { currentSlide = 1; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide;
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+        
+        function changeSlide(n) {
+            currentSlide += n;
+            showSlide(currentSlide);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+        
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
