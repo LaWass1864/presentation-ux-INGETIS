@@ -1,0 +1,1507 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation UX/UI Design - Fondamentaux</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .presentation {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.5s ease;
+            overflow-y: auto;
+            max-height: 90vh;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        h2 {
+            color: #764ba2;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        h3 {
+            color: #667eea;
+            font-size: 1.6em;
+            margin: 30px 0 15px;
+            font-weight: 600;
+        }
+
+        p, li {
+            font-size: 1.2em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .slide-number {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .intro-slide {
+            text-align: center;
+        }
+
+        .intro-slide h1 {
+            font-size: 4em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+        }
+
+        .exercise-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .exercise-box h3 {
+            color: #764ba2;
+            margin-top: 0;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .principle-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            margin: 15px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .principle-card:hover {
+            transform: translateX(10px);
+        }
+
+        .principle-card h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .highlight {
+            background: linear-gradient(to bottom, transparent 50%, #ffd93d 50%);
+            padding: 2px 8px;
+            font-weight: 600;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin: 0 5px;
+        }
+
+        .timer {
+            position: fixed;
+            top: 30px;
+            left: 30px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #764ba2;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: none;
+        }
+
+        .timer.active {
+            display: block;
+        }
+
+        .process-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            flex: 1;
+            margin: 10px;
+            min-width: 150px;
+            transition: all 0.3s ease;
+        }
+
+        .process-step:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .process-step .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .tips-section {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 30px 0;
+        }
+
+        .tips-section h4 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        .image-placeholder {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            border-radius: 10px;
+            padding: 60px;
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        .start-timer-btn {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        .start-timer-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+        }
+
+        .start-timer-btn.hidden {
+            display: none;
+        }
+
+        .pause-timer-btn {
+            position: fixed;
+            top: 100px;
+            left: 30px;
+            background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            z-index: 1000;
+        }
+
+        .pause-timer-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+        }
+
+        .pause-timer-btn.hidden {
+            display: none;
+        }
+
+        .pause-timer-btn.paused {
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 30px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div class="slide-number" id="slideNumber">1 / 16</div>
+        <div class="timer" id="timer">00:00</div>
+
+        <!-- Slide 1: Titre -->
+        <div class="slide active intro-slide">
+            <h1>UX/UI Design</h1>
+            <h2>Les Fondamentaux pour Développeurs & Data</h2>
+            <p style="font-size: 1.5em; color: #999; margin-top: 40px;">Formation Jour 1/5</p>
+            <p style="margin-top: 60px;">🚀 9h00 - 12h30</p>
+        </div>
+
+        <!-- Slide 2: Ice Breaker -->
+        <div class="slide">
+            <h2>🤝 Commençons par nous connaître</h2>
+            <div class="exercise-box">
+                <h3>Tour de table rapide (20 min)</h3>
+                <p><strong>Chacun se présente :</strong></p>
+                <ul>
+                    <li>Prénom & Rôle actuel</li>
+                    <li>Une app que vous <span class="highlight">adorez</span> utiliser et pourquoi ?</li>
+                    <li>Une app que vous <span class="highlight">détestez</span> utiliser et pourquoi ?</li>
+                </ul>
+                <p style="margin-top: 20px;">💡 <em>Pas de bonne ou mauvaise réponse - c'est votre ressenti qui compte !</em></p>
+            </div>
+        </div>
+
+        <!-- Slide 3: UX vs UI -->
+        <div class="slide">
+            <h2>UX ≠ UI : Comprendre la différence</h2>
+            <div class="two-columns">
+                <div>
+                    <h3>🧠 UX (User Experience)</h3>
+                    <ul>
+                        <li><strong>Comment</strong> ça fonctionne</li>
+                        <li>Architecture de l'information</li>
+                        <li>Parcours utilisateur</li>
+                        <li>Résolution de problèmes</li>
+                        <li>Tests et recherche</li>
+                    </ul>
+                    <p style="margin-top: 20px;"><code>if (user.confused) { ux.failed = true }</code></p>
+                </div>
+                <div>
+                    <h3>🎨 UI (User Interface)</h3>
+                    <ul>
+                        <li><strong>Comment</strong> ça apparaît</li>
+                        <li>Design visuel</li>
+                        <li>Typographie & Couleurs</li>
+                        <li>Composants & Layouts</li>
+                        <li>Animations & Micro-interactions</li>
+                    </ul>
+                    <p style="margin-top: 20px;"><code>.button { beauty: 100% }</code></p>
+                </div>
+            </div>
+            <div class="tips-section">
+                <h4>💡 Analogie Dev</h4>
+                <p>UX = Architecture & Logique Backend | UI = Frontend & CSS</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Le Double Diamant -->
+        <div class="slide">
+            <h2>💎 Le Double Diamant</h2>
+            <p style="text-align: center; font-size: 1.3em; margin-bottom: 30px;">Le process de design thinking - Framework du British Design Council</p>
+            
+            <div class="process-flow">
+                <div class="process-step" style="background: #fff3cd;">
+                    <div class="icon">🔍</div>
+                    <h4>Découvrir</h4>
+                    <p>Explorer le problème</p>
+                </div>
+                <div class="process-step" style="background: #cfe2ff;">
+                    <div class="icon">🎯</div>
+                    <h4>Définir</h4>
+                    <p>Cadrer le défi</p>
+                </div>
+                <div class="process-step" style="background: #d1ecf1;">
+                    <div class="icon">💡</div>
+                    <h4>Développer</h4>
+                    <p>Créer des solutions</p>
+                </div>
+                <div class="process-step" style="background: #d4edda;">
+                    <div class="icon">✅</div>
+                    <h4>Délivrer</h4>
+                    <p>Implémenter</p>
+                </div>
+            </div>
+
+            <h3 style="margin-top: 40px;">📋 Exemple concret : Refonte d'un Dashboard Analytics</h3>
+            
+            <div class="principle-card" style="background: #fff3cd;">
+                <h4>1️⃣ Découvrir (Diverger) - Semaines 1-2</h4>
+                <ul>
+                    <li>🔬 <strong>Research utilisateurs</strong> : "Les data analysts passent 3h/jour sur notre outil"</li>
+                    <li>📊 <strong>Analytics actuels</strong> : 40% d'abandons sur la page de création de rapports</li>
+                    <li>🎤 <strong>Interviews</strong> : 15 utilisateurs, 3 personas identifiés</li>
+                    <li>🐛 <strong>Pain points trouvés</strong> : Export lent, filtres confus, pas de templates</li>
+                </ul>
+                <p style="margin-top: 10px;"><em>➡️ On explore TOUT sans filtrer</em></p>
+            </div>
+
+            <div class="principle-card" style="background: #cfe2ff;">
+                <h4>2️⃣ Définir (Converger) - Semaine 3</h4>
+                <ul>
+                    <li>✅ <strong>Problème principal</strong> : "Les utilisateurs ne peuvent pas créer de rapports personnalisés facilement"</li>
+                    <li>📝 <strong>Brief final</strong> : Réduire le temps de création de rapport de 45min à 10min</li>
+                    <li>🎯 <strong>KPIs définis</strong> : Temps de création, taux d'adoption, NPS</li>
+                </ul>
+                <p style="margin-top: 10px;"><em>➡️ On choisit LE problème à résoudre</em></p>
+            </div>
+
+            <div class="principle-card" style="background: #d1ecf1;">
+                <h4>3️⃣ Développer (Diverger) - Semaines 4-5</h4>
+                <ul>
+                    <li>💭 <strong>Brainstorming</strong> : 50+ idées générées</li>
+                    <li>✏️ <strong>Sketches</strong> : Drag & drop, templates prédéfinis, assistant IA</li>
+                    <li>🎨 <strong>3 concepts</strong> : Minimaliste, Wizard guidé, Power user</li>
+                    <li>🔧 <strong>Prototypes</strong> : Figma clickable pour chaque concept</li>
+                </ul>
+                <p style="margin-top: 10px;"><em>➡️ On explore toutes les solutions possibles</em></p>
+            </div>
+
+            <div class="principle-card" style="background: #d4edda;">
+                <h4>4️⃣ Délivrer (Converger) - Semaines 6-8</h4>
+                <ul>
+                    <li>🧪 <strong>Tests utilisateurs</strong> : Concept "Wizard" choisi (85% de succès)</li>
+                    <li>🎨 <strong>Design final</strong> : Components library, specs détaillées</li>
+                    <li>💻 <strong>Dev handoff</strong> : Zeplin + documentation technique</li>
+                    <li>📈 <strong>Résultat</strong> : Temps moyen réduit à 12min, NPS +20 points</li>
+                </ul>
+                <p style="margin-top: 10px;"><em>➡️ On implémente LA meilleure solution</em></p>
+            </div>
+
+            <div class="tips-section">
+                <h4>💡 Analogie Code</h4>
+                <p><strong>Diverger</strong> = Brainstormer plusieurs architectures possibles</p>
+                <p><strong>Converger</strong> = Choisir et implémenter la meilleure solution technique</p>
+                <p style="margin-top: 10px;">⚠️ <strong>Erreur fréquente</strong> : Sauter directement à la solution sans explorer (comme coder sans analyser les requirements)</p>
+            </div>
+        </div>
+
+        <!-- Slide 5: Les 5 éléments de l'UX -->
+        <div class="slide">
+            <h2>📚 Les 5 plans de l'expérience utilisateur</h2>
+            <p style="text-align: center; margin-bottom: 30px;">Modèle de Jesse James Garrett - Du plus abstrait au plus concret</p>
+            
+            <div class="principle-card">
+                <h4>1️⃣ Stratégie - Le "Pourquoi"</h4>
+                <p><strong>Besoins utilisateurs + Objectifs business</strong></p>
+                <ul style="margin-top: 10px;">
+                    <li>👤 <strong>User need</strong> : "Je veux trouver un restaurant rapidement"</li>
+                    <li>💼 <strong>Business goal</strong> : "Générer des commissions sur les réservations"</li>
+                    <li>✅ <strong>Exemple TheFork</strong> : Match entre besoin de réserver et business model</li>
+                    <li>❌ <strong>Échec</strong> : Google+ voulait concurrencer Facebook sans besoin user réel</li>
+                </ul>
+            </div>
+            
+            <div class="principle-card">
+                <h4>2️⃣ Scope (Périmètre) - Le "Quoi"</h4>
+                <p><strong>Fonctionnalités + Contenu requis</strong></p>
+                <ul style="margin-top: 10px;">
+                    <li>📋 <strong>Features</strong> : Recherche, filtres, réservation, avis, photos</li>
+                    <li>📝 <strong>Content</strong> : Menus, horaires, descriptions, prix</li>
+                    <li>✅ <strong>MVP Uber</strong> : Juste commander une voiture (pas de food, pas de vélos au début)</li>
+                    <li>❌ <strong>Feature creep</strong> : Microsoft Word avec 1000+ fonctions que personne n'utilise</li>
+                </ul>
+            </div>
+            
+            <div class="principle-card">
+                <h4>3️⃣ Structure - Le "Comment c'est organisé"</h4>
+                <p><strong>Architecture de l'info + Flows d'interaction</strong></p>
+                <ul style="margin-top: 10px;">
+                    <li>🗂️ <strong>IA</strong> : Catégories → Sous-catégories → Produits</li>
+                    <li>🔄 <strong>User flow</strong> : Recherche → Résultats → Détail → Réservation → Confirmation</li>
+                    <li>✅ <strong>Amazon</strong> : Méga-menu bien structuré malgré millions de produits</li>
+                    <li>❌ <strong>Sites gouvernementaux</strong> : Structure basée sur l'organigramme interne, pas les besoins users</li>
+                </ul>
+            </div>
+            
+            <div class="principle-card">
+                <h4>4️⃣ Squelette - Le "Comment on navigue"</h4>
+                <p><strong>Wireframes + Design de l'interface + Navigation</strong></p>
+                <ul style="margin-top: 10px;">
+                    <li>📐 <strong>Layout</strong> : Header/Nav/Content/Sidebar/Footer</li>
+                    <li>🧭 <strong>Navigation</strong> : Menu principal, breadcrumb, pagination, search</li>
+                    <li>✅ <strong>Medium</strong> : Navigation minimaliste, focus sur le contenu</li>
+                    <li>❌ <strong>Old Reddit</strong> : Navigation confuse, trop d'éléments concurrents</li>
+                </ul>
+            </div>
+            
+            <div class="principle-card">
+                <h4>5️⃣ Surface - Le "Look & Feel"</h4>
+                <p><strong>Design visuel final</strong></p>
+                <ul style="margin-top: 10px;">
+                    <li>🎨 <strong>Visual</strong> : Couleurs, typo, images, spacing, animations</li>
+                    <li>✨ <strong>Micro-interactions</strong> : Hover states, transitions, feedback visuels</li>
+                    <li>✅ <strong>Stripe</strong> : Design épuré qui inspire confiance pour les paiements</li>
+                    <li>❌ <strong>MySpace</strong> : Chacun personnalisait = chaos visuel total</li>
+                </ul>
+            </div>
+
+            <div class="tips-section">
+                <h4>⚠️ Erreur classique</h4>
+                <p>Commencer par la Surface (le joli) au lieu de la Stratégie = <code>CSS avant HTML</code> 🤦</p>
+            </div>
+        </div>
+
+        <!-- Slide 6: Loi de Fitts -->
+        <div class="slide">
+            <h2>📐 Loi de Fitts</h2>
+            <p style="font-size: 1.4em; text-align: center; margin: 30px 0;">
+                <code>Temps = a + b × log₂(Distance/Taille + 1)</code>
+            </p>
+            
+            <div class="principle-card">
+                <h4>En pratique :</h4>
+                <ul>
+                    <li>Plus c'est <span class="highlight">gros</span>, plus c'est facile à cliquer</li>
+                    <li>Plus c'est <span class="highlight">proche</span>, plus c'est rapide à atteindre</li>
+                    <li>Les coins et bords de l'écran sont des zones "infinies"</li>
+                </ul>
+            </div>
+
+            <div class="two-columns">
+                <div class="exercise-box" style="background: #d4edda;">
+                    <h3>✅ Bien appliqué</h3>
+                    <ul>
+                        <li><strong>Amazon "Acheter"</strong> : Bouton énorme, orange vif, toujours au même endroit</li>
+                        <li><strong>macOS dock</strong> : Icônes qui grossissent au survol + bord infini en bas</li>
+                        <li><strong>Spotify play</strong> : Gros bouton vert central, impossible à rater</li>
+                        <li><strong>iOS Control Center</strong> : Grandes zones tactiles pour wifi/bluetooth</li>
+                        <li><strong>Windows Start</strong> : Coin infini en bas à gauche depuis 1995</li>
+                        <li><strong>YouTube fullscreen</strong> : Double-clic n'importe où sur la vidéo</li>
+                    </ul>
+                </div>
+                <div class="exercise-box" style="background: #f8d7da;">
+                    <h3>❌ Mal appliqué</h3>
+                    <ul>
+                        <li><strong>Pubs mobiles</strong> : Croix de 5px pour fermer (fait exprès!)</li>
+                        <li><strong>Cookie banners</strong> : "Refuser" en gris minuscule vs "Accepter" énorme</li>
+                        <li><strong>Vieux forums</strong> : Liens de pagination 1 2 3 4... collés</li>
+                        <li><strong>Dropdown menus</strong> : Sous-menus qui disparaissent si on dévie</li>
+                        <li><strong>LinkedIn messaging</strong> : Boutons minuscules sur mobile</li>
+                        <li><strong>Formulaires</strong> : Checkboxes de 13x13px standard HTML</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Loi de Hick -->
+        <div class="slide">
+            <h2>⏱️ Loi de Hick</h2>
+            <p style="font-size: 1.4em; text-align: center; margin: 30px 0;">
+                <code>Temps de décision = b × log₂(n + 1)</code>
+            </p>
+            <p style="text-align: center; color: #999;">n = nombre de choix</p>
+            
+            <div class="principle-card">
+                <h4>Le paradoxe du choix</h4>
+                <p>Plus il y a d'options, plus la décision est <strong>longue et difficile</strong></p>
+                <p style="margin-top: 10px;">📊 <em>Étude célèbre : Jam Study - 24 confitures = 3% d'achats vs 6 confitures = 30% d'achats</em></p>
+            </div>
+
+            <div class="two-columns">
+                <div class="exercise-box" style="background: #d4edda;">
+                    <h3>✅ Bien appliqué</h3>
+                    <ul>
+                        <li><strong>Google Home</strong> : 1 seul champ de recherche</li>
+                        <li><strong>Spotify</strong> : Play/Pause dominant + reste secondaire</li>
+                        <li><strong>iOS Settings</strong> : Catégories groupées (pas 50 options plates)</li>
+                        <li><strong>Tinder</strong> : Seulement Like/Nope (2 choix)</li>
+                        <li><strong>Netflix</strong> : "Continuer à regarder" en premier</li>
+                        <li><strong>Medium</strong> : 1 bouton "Clap" (pas like/love/wow...)</li>
+                        <li><strong>Stripe Checkout</strong> : Étapes progressives, pas tout d'un coup</li>
+                    </ul>
+                </div>
+                <div class="exercise-box" style="background: #f8d7da;">
+                    <h3>❌ Mal appliqué</h3>
+                    <ul>
+                        <li><strong>Windows Control Panel</strong> : 40+ icônes en grille</li>
+                        <li><strong>Amazon filters</strong> : 100+ options sur la gauche</li>
+                        <li><strong>Old Facebook settings</strong> : Menu interminable</li>
+                        <li><strong>Microsoft Word ribbon</strong> : Tout visible tout le temps</li>
+                        <li><strong>Restaurant menus QR</strong> : 200 plats sur mobile</li>
+                        <li><strong>Dating apps premium</strong> : 15 types de likes différents</li>
+                        <li><strong>JIRA</strong> : Toutes les options d'un ticket visibles</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h4>💡 Techniques pour réduire la charge</h4>
+                <ul>
+                    <li><strong>Progressive disclosure</strong> : Montrer les options avancées seulement si besoin</li>
+                    <li><strong>Chunking</strong> : Grouper par catégories (7±2 éléments max par groupe)</li>
+                    <li><strong>Defaults intelligents</strong> : Pré-sélectionner l'option la plus probable</li>
+                    <li><strong>Search vs Browse</strong> : Si >20 options, privilégier la recherche</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 8: Loi de Jakob -->
+        <div class="slide">
+            <h2>🔄 Loi de Jakob (Nielsen)</h2>
+            
+            <div style="background: #f0f8ff; padding: 30px; border-radius: 10px; text-align: center; margin: 30px 0;">
+                <p style="font-size: 1.5em; font-weight: 600; color: #667eea;">
+                    "Les utilisateurs passent la plupart de leur temps sur d'autres sites"
+                </p>
+                <p style="margin-top: 15px; color: #666;">Donc ils préfèrent que votre site fonctionne comme tous les autres qu'ils connaissent déjà</p>
+            </div>
+
+            <h3>📋 Conventions universelles à respecter</h3>
+            
+            <div class="two-columns">
+                <div class="principle-card">
+                    <h4>🧭 Navigation</h4>
+                    <ul>
+                        <li><strong>Logo en haut à gauche</strong> = Retour home (99% des sites)</li>
+                        <li><strong>Menu hamburger ☰</strong> = Menu mobile (universel)</li>
+                        <li><strong>🔍 en haut à droite</strong> = Recherche</li>
+                        <li><strong>Footer</strong> = Liens institutionnels, légal, contact</li>
+                        <li><strong>Breadcrumb</strong> = Home > Category > Product</li>
+                    </ul>
+                </div>
+                <div class="principle-card">
+                    <h4>🛒 E-commerce</h4>
+                    <ul>
+                        <li><strong>Panier en haut à droite</strong> avec compteur</li>
+                        <li><strong>Photos à gauche</strong>, infos à droite</li>
+                        <li><strong>Étoiles ⭐</strong> = Note du produit</li>
+                        <li><strong>Prix barré</strong> = Promotion</li>
+                        <li><strong>"Ajouter au panier"</strong> = Gros bouton coloré</li>
+                    </ul>
+                </div>
+                <div class="principle-card">
+                    <h4>📝 Formulaires</h4>
+                    <ul>
+                        <li><strong>* rouge</strong> = Champ obligatoire</li>
+                        <li><strong>Label au-dessus</strong> du champ (pas dedans)</li>
+                        <li><strong>Validation en temps réel</strong> ✓ ou ✗</li>
+                        <li><strong>Placeholder gris</strong> = Exemple de saisie</li>
+                        <li><strong>Submit en bas à droite</strong> ou centré</li>
+                    </ul>
+                </div>
+                <div class="principle-card">
+                    <h4>🔗 Interactions</h4>
+                    <ul>
+                        <li><strong>Liens bleus ou soulignés</strong> = Cliquable</li>
+                        <li><strong>Hover</strong> = Changement visuel (curseur, couleur)</li>
+                        <li><strong>Bouton grisé</strong> = Désactivé</li>
+                        <li><strong>Loading spinner</strong> = Traitement en cours</li>
+                        <li><strong>Toast/Snackbar</strong> = Notification temporaire</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="exercise-box" style="background: #fff3cd; border-color: #ffc107;">
+                <h3>⚠️ Quand briser les conventions ?</h3>
+                <p><strong>SEULEMENT si :</strong></p>
+                <ul>
+                    <li>✅ Vous avez testé avec de vrais utilisateurs</li>
+                    <li>✅ L'innovation apporte une vraie valeur mesurable</li>
+                    <li>✅ Le contexte le justifie (app très spécialisée)</li>
+                </ul>
+                <p style="margin-top: 15px;"><strong>Exemples réussis :</strong> Tinder (swipe), Stories (Instagram/Snapchat), Pull to refresh (Twitter)</p>
+                <p><strong>Exemples ratés :</strong> Windows 8 Metro, Snapchat UI sur Android, Google Wave</p>
+            </div>
+
+            <div class="tips-section">
+                <h4>💻 Pour les devs</h4>
+                <p>Utiliser les conventions = Utiliser des libraries standard plutôt que tout recoder from scratch</p>
+            </div>
+        </div>
+
+        <!-- Slide 9: Principes Gestalt -->
+        <div class="slide">
+            <h2>👁️ Principes de la Gestalt</h2>
+            <p style="text-align: center; margin-bottom: 30px;">Comment notre cerveau groupe les éléments visuels</p>
+            
+            <div class="principle-card">
+                <h4>📍 Proximité</h4>
+                <p><strong>Principe :</strong> Éléments proches = perçus comme un groupe</p>
+                <ul style="margin-top: 10px;">
+                    <li>✅ <strong>Google Results</strong> : Titre, URL et description groupés = 1 résultat</li>
+                    <li>✅ <strong>Forms</strong> : Label proche de son input (pas flottant au milieu)</li>
+                    <li>✅ <strong>Card design</strong> : Image + titre + texte espacés ensemble</li>
+                    <li>❌ <strong>Bad forms</strong> : Labels éloignés créent de la confusion</li>
+                </ul>
+            </div>
+            
+            <div class="principle-card">
+                <h4>🔄 Similarité</h4>
+                <p><strong>Principe :</strong> Éléments similaires = perçus comme liés</p>
+                <ul style="margin-top: 10px;">
+                    <li>✅ <strong>GitHub</strong> : Tous les boutons verts = actions principales</li>
+                    <li>✅ <strong>iOS</strong> : Tous les toggles ont le même design</li>
+                    <li>✅ <strong>Slack</strong> : Tous les channels avec # , tous les DM avec 🟢</li>
+                    <li>❌ <strong>Bad design</strong> : Boutons importants avec styles différents</li>
+                </ul>
+            </div>
+            
+            <div class="principle-card">
+                <h4>⭕ Fermeture</h4>
+                <p><strong>Principe :</strong> Le cerveau complète les formes incomplètes</p>
+                <ul style="margin-top: 10px;">
+                    <li>✅ <strong>Logo IBM</strong> : Lignes horizontales mais on voit les lettres</li>
+                    <li>✅ <strong>Loading spinners</strong> : Cercle incomplet qui tourne</li>
+                    <li>✅ <strong>Carousels dots</strong> : ○○●○○ on comprend la position</li>
+                    <li>✅ <strong>Progress bars</strong> : Barre partiellement remplie</li>
+                </ul>
+            </div>
+            
+            <div class="principle-card">
+                <h4>➡️ Continuité</h4>
+                <p><strong>Principe :</strong> L'œil suit naturellement les lignes et courbes</p>
+                <ul style="margin-top: 10px;">
+                    <li>✅ <strong>Timeline designs</strong> : LinkedIn experience avec ligne verticale</li>
+                    <li>✅ <strong>Progress steppers</strong> : 1→2→3→4 avec ligne continue</li>
+                    <li>✅ <strong>Amazon</strong> : Breadcrumb navigation Home > Electronics > Phones</li>
+                    <li>✅ <strong>Subway maps</strong> : Lignes de métro colorées</li>
+                </ul>
+            </div>
+
+            <div class="principle-card">
+                <h4>🎯 Figure/Fond</h4>
+                <p><strong>Principe :</strong> Distinction automatique entre premier plan et arrière-plan</p>
+                <ul style="margin-top: 10px;">
+                    <li>✅ <strong>Modals</strong> : Overlay sombre + contenu blanc au-dessus</li>
+                    <li>✅ <strong>Floating Action Button</strong> : Bouton avec ombre sur le contenu</li>
+                    <li>✅ <strong>macOS windows</strong> : Fenêtre active plus lumineuse</li>
+                    <li>❌ <strong>Bad contrast</strong> : Texte gris clair sur fond blanc</li>
+                </ul>
+            </div>
+
+            <div class="principle-card">
+                <h4>🔗 Connexion</h4>
+                <p><strong>Principe :</strong> Éléments connectés visuellement = perçus comme liés</p>
+                <ul style="margin-top: 10px;">
+                    <li>✅ <strong>Flowcharts</strong> : Boîtes reliées par des flèches</li>
+                    <li>✅ <strong>Breadcrumbs</strong> : Séparateurs > ou / entre les niveaux</li>
+                    <li>✅ <strong>Tabs</strong> : Tab active connectée au contenu (pas de bordure)</li>
+                    <li>✅ <strong>Comment threads</strong> : Lignes verticales pour les réponses</li>
+                </ul>
+            </div>
+
+            <div class="tips-section">
+                <h4>💻 Application Dev</h4>
+                <p>Ces principes = <code>CSS classes</code> pour le cerveau ! Le cerveau applique automatiquement ces "styles" pour organiser l'information visuelle.</p>
+            </div>
+        </div>
+
+        <!-- Slide 10: Exercice Critique -->
+        <div class="slide">
+            <h2>🔍 Exercice : Critique & Redesign</h2>
+            <div class="timer active" id="exerciseTimer">⏱️ 30:00</div>
+            <button class="start-timer-btn" id="startTimerBtn" onclick="startExerciseTimer()">
+                ▶️ Démarrer le chrono
+            </button>
+            <button class="pause-timer-btn hidden" id="pauseTimerBtn" onclick="togglePauseTimer()">
+                ⏸️ Pause
+            </button>
+            
+            <div class="exercise-box">
+                <h3>Mission en équipes de 3-4 personnes (30 min total)</h3>
+                
+                <div style="background: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4>📱 Phase 1 : Analyse (10 min)</h4>
+                    <p>Identifiez les 5 problèmes UX/UI majeurs</p>
+                    <ul>
+                        <li>Qu'est-ce qui bloque l'utilisateur ?</li>
+                        <li>Quelles lois UX sont violées ?</li>
+                    </ul>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4>✏️ Phase 2 : Solutions rapides (10 min)</h4>
+                    <p>Top 3 améliorations prioritaires</p>
+                    <ul>
+                        <li>Sketch rapide (papier ou tableau)</li>
+                        <li>Focus sur l'impact utilisateur</li>
+                    </ul>
+                </div>
+
+                <div style="background: white; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                    <h4>🎤 Phase 3 : Pitch éclair (10 min)</h4>
+                    <p>Chaque groupe présente en 2 min max</p>
+                </div>
+            </div>
+
+            <div class="exercise-box" style="background: #fff3cd; border-color: #ffc107;">
+                <h3>🎯 Sites à analyser (au choix) :</h3>
+                <ul>
+                    <li><strong>Service-public.fr</strong> - Navigation labyrinthique</li>
+                    <li><strong>Lingscars.com</strong> - Chaos visuel légendaire</li>
+                    <li><strong>Yale School of Art</strong> - art.yale.edu - Design "artistique"</li>
+                    <li><strong>Arngren.net</strong> - E-commerce norvégien old school</li>
+                    <li><strong>Pacific Northwest X-Ray</strong> - pnwx.com - Medical des 90's</li>
+                    <li><strong>Bellingham Bells</strong> - bellsbaseball.com - Surcharge d'animations</li>
+                    <li><strong>Impots.gouv.fr</strong> - Formulaires complexes</li>
+                    <li><strong>Old Reddit</strong> - old.reddit.com - UX dépassée</li>
+                </ul>
+                <p style="margin-top: 15px;"><em>💡 Ou prenez un screenshot d'une app/site que vous trouvez frustrant !</em></p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Le Process UX -->
+        <div class="slide">
+            <h2>🔄 Le Process UX Complet</h2>
+            
+            <div class="process-flow" style="margin: 40px 0;">
+                <div class="process-step">
+                    <div class="icon">🔬</div>
+                    <h4>Research</h4>
+                </div>
+                <div class="process-step">
+                    <div class="icon">💭</div>
+                    <h4>Ideation</h4>
+                </div>
+                <div class="process-step">
+                    <div class="icon">✏️</div>
+                    <h4>Design</h4>
+                </div>
+                <div class="process-step">
+                    <div class="icon">🛠️</div>
+                    <h4>Prototype</h4>
+                </div>
+                <div class="process-step">
+                    <div class="icon">🧪</div>
+                    <h4>Test</h4>
+                </div>
+            </div>
+
+            <h3>🔬 Research : Comprendre les utilisateurs</h3>
+            <div class="two-columns">
+                <div>
+                    <h4>Méthodes Qualitatives</h4>
+                    <ul>
+                        <li>Interviews utilisateurs</li>
+                        <li>Observation terrain</li>
+                        <li>Parcours utilisateur</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Méthodes Quantitatives</h4>
+                    <ul>
+                        <li>Analytics</li>
+                        <li>A/B Testing</li>
+                        <li>Heatmaps</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h4>💡 Pour les Devs</h4>
+                <p>La research UX = <code>console.log()</code> pour comprendre les vrais besoins users</p>
+            </div>
+        </div>
+
+        <!-- Slide 12: Personas & User Journey -->
+        <div class="slide">
+            <h2>👥 Personas & User Journey</h2>
+            
+            <div class="principle-card">
+                <h4>Persona = Utilisateur Type</h4>
+                <ul>
+                    <li><strong>Qui :</strong> Âge, profession, contexte</li>
+                    <li><strong>Objectifs :</strong> Ce qu'il veut accomplir</li>
+                    <li><strong>Frustrations :</strong> Ses pain points</li>
+                    <li><strong>Comportements :</strong> Comment il utilise le produit</li>
+                </ul>
+                <p style="margin-top: 15px;"><code>const user = new Persona({ needs, goals, painPoints })</code></p>
+            </div>
+
+            <h3>🗺️ User Journey Mapping</h3>
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="icon">👀</div>
+                    <p>Découverte</p>
+                </div>
+                <div class="process-step">
+                    <div class="icon">🤔</div>
+                    <p>Considération</p>
+                </div>
+                <div class="process-step">
+                    <div class="icon">🎯</div>
+                    <p>Décision</p>
+                </div>
+                <div class="process-step">
+                    <div class="icon">💳</div>
+                    <p>Action</p>
+                </div>
+                <div class="process-step">
+                    <div class="icon">🔄</div>
+                    <p>Fidélisation</p>
+                </div>
+            </div>
+
+            <div class="exercise-box">
+                <h3>Mini-exercice : Votre User Journey</h3>
+                <p>Décrivez votre parcours pour commander un café via une app mobile. Quels sont les points de friction ?</p>
+            </div>
+        </div>
+
+        <!-- Slide 13: Design System -->
+        <div class="slide">
+            <h2>🎨 Design System : La Cohérence à l'échelle</h2>
+            
+            <div style="background: #f0f8ff; padding: 30px; border-radius: 10px; margin: 30px 0;">
+                <p style="font-size: 1.3em; text-align: center;">
+                    <strong>Design System = Bibliothèque de composants réutilisables</strong><br>
+                    <span style="color: #999; font-size: 0.9em;">Le principe DRY (Don't Repeat Yourself) appliqué au design !</span>
+                </p>
+            </div>
+
+            <h3>🏗️ Architecture d'un Design System</h3>
+            
+            <div class="two-columns">
+                <div class="principle-card">
+                    <h4>🎯 Foundations (Tokens)</h4>
+                    <ul>
+                        <li><strong>Couleurs</strong>
+                            <br>→ Primary: <code>#667eea</code>
+                            <br>→ Danger: <code>#dc3545</code>
+                            <br>→ Success: <code>#28a745</code>
+                        </li>
+                        <li><strong>Typography</strong>
+                            <br>→ H1: 32px/40px bold
+                            <br>→ Body: 16px/24px regular
+                        </li>
+                        <li><strong>Spacing</strong>
+                            <br>→ Base unit: 8px
+                            <br>→ xs:4, s:8, m:16, l:24, xl:32
+                        </li>
+                        <li><strong>Shadows</strong>
+                            <br>→ sm: 0 2px 4px rgba(0,0,0,0.1)
+                            <br>→ lg: 0 10px 30px rgba(0,0,0,0.2)
+                        </li>
+                    </ul>
+                </div>
+                <div class="principle-card">
+                    <h4>📦 Components</h4>
+                    <ul>
+                        <li><strong>Button</strong>
+                            <br>→ Primary, Secondary, Danger
+                            <br>→ Small, Medium, Large
+                            <br>→ States: Default, Hover, Active, Disabled
+                        </li>
+                        <li><strong>Input</strong>
+                            <br>→ Text, Email, Password, Number
+                            <br>→ States: Empty, Filled, Error, Success
+                        </li>
+                        <li><strong>Card</strong>
+                            <br>→ Header + Body + Footer
+                            <br>→ Elevated, Outlined
+                        </li>
+                        <li><strong>Modal</strong>
+                            <br>→ Overlay + Container
+                            <br>→ Sizes: sm, md, lg, fullscreen
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🌟 Exemples de Design Systems célèbres</h3>
+            
+            <div class="two-columns">
+                <div class="exercise-box" style="background: #e3f2fd;">
+                    <h4>🔵 Material Design (Google)</h4>
+                    <ul>
+                        <li>Paper & ink metaphor</li>
+                        <li>Elevation via shadows</li>
+                        <li>Ripple effects partout</li>
+                        <li>FAB (Floating Action Button)</li>
+                        <li>Used by: Gmail, YouTube, Android</li>
+                    </ul>
+                </div>
+                <div class="exercise-box" style="background: #f3e5f5;">
+                    <h4>🟣 Human Interface Guidelines (Apple)</h4>
+                    <ul>
+                        <li>SF Pro font family</li>
+                        <li>Vibrancy & translucency</li>
+                        <li>Rounded corners (continuous curves)</li>
+                        <li>Haptic feedback</li>
+                        <li>Used by: iOS, macOS, watchOS</li>
+                    </ul>
+                </div>
+                <div class="exercise-box" style="background: #e0f2f1;">
+                    <h4>🔷 Carbon (IBM)</h4>
+                    <ul>
+                        <li>Open source</li>
+                        <li>4 themes (White, g10, g90, g100)</li>
+                        <li>2px grid system</li>
+                        <li>Accessibility first</li>
+                        <li>Used by: IBM Cloud, Watson</li>
+                    </ul>
+                </div>
+                <div class="exercise-box" style="background: #fce4ec;">
+                    <h4>🔴 Ant Design</h4>
+                    <ul>
+                        <li>Enterprise-focused</li>
+                        <li>Rich components (DatePicker, Table...)</li>
+                        <li>Design language for B2B</li>
+                        <li>React/Vue implementations</li>
+                        <li>Used by: Alibaba, Baidu, Tencent</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h4>🤝 Design Tokens = Variables partagées</h4>
+                <p><strong>Figma:</strong> Color Styles → <strong>Code:</strong> CSS Variables</p>
+                <p><code>/* tokens.css */</code></p>
+                <p><code>:root {</code></p>
+                <p><code>  --color-primary: #667eea;</code></p>
+                <p><code>  --spacing-m: 16px;</code></p>
+                <p><code>  --radius-default: 8px;</code></p>
+                <p><code>}</code></p>
+            </div>
+
+            <div class="exercise-box">
+                <h3>💡 Pourquoi c'est critique ?</h3>
+                <ul>
+                    <li>✅ <strong>Consistency</strong> : 1 bouton, pas 15 variations</li>
+                    <li>✅ <strong>Speed</strong> : Pas besoin de réinventer à chaque fois</li>
+                    <li>✅ <strong>Maintenance</strong> : 1 changement = appliqué partout</li>
+                    <li>✅ <strong>Onboarding</strong> : Nouveaux devs/designers productifs rapidement</li>
+                    <li>✅ <strong>A/B Testing</strong> : Comparer des variations cohérentes</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 14: Tests Utilisateurs -->
+        <div class="slide">
+            <h2>🧪 Tests Utilisateurs : Le Feedback Loop</h2>
+            
+            <div class="principle-card" style="background: #e8f5e9;">
+                <h4>📊 Règle d'or de Jakob Nielsen</h4>
+                <p style="font-size: 1.3em; text-align: center; margin: 15px 0;">
+                    <strong>5 utilisateurs = 85% des problèmes détectés</strong>
+                </p>
+                <p>Pourquoi ? Après 5 users, les problèmes commencent à se répéter (rendements décroissants)</p>
+            </div>
+
+            <h3>🔬 Types de Tests & Exemples</h3>
+            
+            <div class="two-columns">
+                <div class="principle-card">
+                    <h4>🏃 Tests Modérés</h4>
+                    <p><strong>Facilitateur présent guide le test</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>✅ <strong>Guerilla testing</strong> : Starbucks avec tablette</li>
+                        <li>✅ <strong>Lab testing</strong> : Eye-tracking, recording</li>
+                        <li>✅ <strong>Contextual inquiry</strong> : Observer sur le lieu de travail</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Exemple :</strong> "Trouvez un pull rouge sous 50€"</p>
+                    <p>→ Observer où ils cliquent, questions possibles</p>
+                </div>
+                <div class="principle-card">
+                    <h4>🤖 Tests Non-modérés</h4>
+                    <p><strong>User teste seul, à distance</strong></p>
+                    <ul style="margin-top: 10px;">
+                        <li>✅ <strong>UserTesting.com</strong> : Videos de sessions</li>
+                        <li>✅ <strong>Maze</strong> : Click paths automatisés</li>
+                        <li>✅ <strong>Hotjar</strong> : Heatmaps & recordings</li>
+                    </ul>
+                    <p style="margin-top: 10px;"><strong>Exemple :</strong> 100 users, tâches prédéfinies</p>
+                    <p>→ Données quantitatives massives</p>
+                </div>
+            </div>
+
+            <h3>📏 Métriques Clés</h3>
+            
+            <div class="two-columns">
+                <div class="exercise-box" style="background: #e3f2fd;">
+                    <h4>📊 Quantitatif</h4>
+                    <ul>
+                        <li><strong>Task Success Rate</strong> : 75% ont réussi</li>
+                        <li><strong>Time on Task</strong> : Moyenne 2min34s</li>
+                        <li><strong>Error Rate</strong> : 3.2 erreurs/user</li>
+                        <li><strong>Clicks to Complete</strong> : 5 clics moyens</li>
+                        <li><strong>SUS Score</strong> : System Usability Scale /100</li>
+                    </ul>
+                </div>
+                <div class="exercise-box" style="background: #fff3cd;">
+                    <h4>💭 Qualitatif</h4>
+                    <ul>
+                        <li><strong>Verbatims</strong> : "C'est où le bouton ?"</li>
+                        <li><strong>Frustrations</strong> : Soupirs, froncements</li>
+                        <li><strong>Confusions</strong> : Hésitations, retours</li>
+                        <li><strong>Satisfactions</strong> : "Ah super !"</li>
+                        <li><strong>Suggestions</strong> : "Ce serait mieux si..."</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="principle-card">
+                <h4>🎯 Exemple Concret : Test d'un Checkout E-commerce</h4>
+                <div style="background: white; padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <p><strong>Protocole :</strong></p>
+                    <ol>
+                        <li>🎯 <strong>Tâche</strong> : "Achetez ces sneakers en taille 42, livraison express"</li>
+                        <li>👥 <strong>5 participants</strong> : Mix âges, 3 habitués e-commerce, 2 novices</li>
+                        <li>⏱️ <strong>Durée</strong> : 15 min par session</li>
+                    </ol>
+                    <p style="margin-top: 15px;"><strong>Résultats trouvés :</strong></p>
+                    <ul>
+                        <li>❌ 80% n'ont pas vu l'option "livraison express" (trop bas)</li>
+                        <li>❌ 60% confus par "Continuer sans compte" (grisé)</li>
+                        <li>❌ 40% ont cliqué sur le logo au lieu de "Retour"</li>
+                        <li>✅ 100% ont apprécié la progress bar du checkout</li>
+                    </ul>
+                    <p style="margin-top: 15px;"><strong>→ Actions :</strong> Remonter delivery options, clarifier guest checkout, ajouter back button</p>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h4>💻 Parallèle Dev</h4>
+                <div style="font-family: monospace; background: #f4f4f4; padding: 15px; border-radius: 5px;">
+                    <p><code>// Tests unitaires pour l'UX</code></p>
+                    <p><code>describe('User checkout flow', () => {</code></p>
+                    <p><code>  test('Can complete purchase', () => {</code></p>
+                    <p><code>    expect(user.findDeliveryOption()).toBeTruthy();</code></p>
+                    <p><code>    expect(user.completionTime).toBeLessThan(180);</code></p>
+                    <p><code>    expect(user.errors).toBeLessThan(2);</code></p>
+                    <p><code>  });</code></p>
+                    <p><code>});</code></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Collaboration Dev-Design -->
+        <div class="slide">
+            <h2>🤝 Collaboration Dev-Design</h2>
+            
+            <h3>Comment mieux travailler ensemble ?</h3>
+            
+            <div class="two-columns">
+                <div class="principle-card">
+                    <h4>👨‍💻 Ce que les Devs attendent</h4>
+                    <ul>
+                        <li>Specs claires et complètes</li>
+                        <li>Assets exportés correctement</li>
+                        <li>Cohérence des patterns</li>
+                        <li>Gestion des edge cases</li>
+                        <li>Responsive défini</li>
+                    </ul>
+                </div>
+                <div class="principle-card">
+                    <h4>👨‍🎨 Ce que les Designers attendent</h4>
+                    <ul>
+                        <li>Respect du design</li>
+                        <li>Feedback sur la faisabilité</li>
+                        <li>Animations fluides</li>
+                        <li>Attention aux détails</li>
+                        <li>Questions si pas clair</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3>🛠️ Outils de Handoff</h3>
+            <div class="process-flow">
+                <div class="process-step">
+                    <div class="icon">🎨</div>
+                    <h4>Figma</h4>
+                    <p>Dev mode</p>
+                </div>
+                <div class="process-step">
+                    <div class="icon">📐</div>
+                    <h4>Zeplin</h4>
+                    <p>Specs auto</p>
+                </div>
+                <div class="process-step">
+                    <div class="icon">📚</div>
+                    <h4>Storybook</h4>
+                    <p>Doc composants</p>
+                </div>
+            </div>
+
+            <div class="tips-section">
+                <h4>✨ Best Practices</h4>
+                <ul>
+                    <li>Impliquer les devs tôt dans le process</li>
+                    <li>Design reviews régulières</li>
+                    <li>Prototypes interactifs</li>
+                    <li>Documentation partagée</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 16: Wrap-up -->
+        <div class="slide">
+            <h2>🎯 Points Clés à Retenir</h2>
+            
+            <div class="principle-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h3 style="color: white;">1️⃣ L'UX n'est pas que du "joli"</h3>
+                <p>C'est résoudre des problèmes réels pour de vrais utilisateurs</p>
+            </div>
+
+            <div class="principle-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h3 style="color: white;">2️⃣ Testez, testez, testez</h3>
+                <p>Vos assumptions ≠ Réalité des utilisateurs</p>
+            </div>
+
+            <div class="principle-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h3 style="color: white;">3️⃣ La cohérence est clé</h3>
+                <p>Design System = Code maintenable</p>
+            </div>
+
+            <h3>📚 Ressources pour approfondir</h3>
+            <ul>
+                <li>🔗 <strong>Nielsen Norman Group</strong> - nngroup.com</li>
+                <li>🔗 <strong>Laws of UX</strong> - lawsofux.com</li>
+                <li>🔗 <strong>Design System Repo</strong> - designsystemsrepo.com</li>
+                <li>📖 <strong>"Don't Make Me Think"</strong> - Steve Krug</li>
+                <li>📖 <strong>"The Design of Everyday Things"</strong> - Don Norman</li>
+            </ul>
+
+            <div class="exercise-box">
+                <h3>🚀 Pour la prochaine session</h3>
+                <p>Observez 3 interfaces que vous utilisez quotidiennement et identifiez :</p>
+                <ul>
+                    <li>1 excellent choix UX/UI</li>
+                    <li>1 problème à corriger</li>
+                    <li>Comment vous l'amélioreriez</li>
+                </ul>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px; font-size: 1.5em;">
+                Merci et à la prochaine session ! 🎉
+            </p>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">⬅️ Précédent</button>
+        <button class="nav-btn" onclick="nextSlide()">Suivant ➡️</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 16;
+        let timerInterval;
+        let exerciseTimerInterval;
+        let exerciseTime = 60000 ; // 30 minutes en secondes
+        let timerStarted = false;
+        let timerPaused = false;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('slideNumber').textContent = `${currentSlide} / ${totalSlides}`;
+            
+            // Gestion du timer et des boutons pour l'exercice
+            if (currentSlide === 10) {
+                // Si on revient sur la slide 10 et que le timer n'est pas en cours
+                if (!timerStarted) {
+                    const startBtn = document.getElementById('startTimerBtn');
+                    const pauseBtn = document.getElementById('pauseTimerBtn');
+                    if (startBtn) {
+                        startBtn.classList.remove('hidden');
+                    }
+                    if (pauseBtn) {
+                        pauseBtn.classList.add('hidden');
+                    }
+                    // Réinitialiser l'affichage du timer
+                    document.getElementById('exerciseTimer').textContent = '⏱️ 30:00';
+                    document.getElementById('exerciseTimer').style.background = 'white';
+                    document.getElementById('exerciseTimer').style.color = '#764ba2';
+                }
+            } else if (currentSlide !== 10 && exerciseTimerInterval) {
+                // Si on quitte la slide 10 pendant que le timer tourne
+                clearInterval(exerciseTimerInterval);
+                exerciseTimerInterval = null;
+                timerStarted = false;
+                timerPaused = false;
+                exerciseTime = 1800; // Réinitialiser le temps
+            }
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        function startTimer() {
+            let seconds = 0;
+            timerInterval = setInterval(() => {
+                seconds++;
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const secs = seconds % 60;
+                document.getElementById('timer').textContent = 
+                    `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        function startExerciseTimer() {
+            // Cacher le bouton start et montrer le bouton pause
+            const startBtn = document.getElementById('startTimerBtn');
+            const pauseBtn = document.getElementById('pauseTimerBtn');
+            if (startBtn) {
+                startBtn.classList.add('hidden');
+            }
+            if (pauseBtn) {
+                pauseBtn.classList.remove('hidden');
+                pauseBtn.textContent = '⏸️ Pause';
+                pauseBtn.classList.remove('paused');
+            }
+            
+            timerStarted = true;
+            timerPaused = false;
+            
+            exerciseTimerInterval = setInterval(() => {
+                exerciseTime--;
+                const minutes = Math.floor(exerciseTime / 60);
+                const secs = exerciseTime % 60;
+                const timerElement = document.getElementById('exerciseTimer');
+                if (timerElement) {
+                    timerElement.textContent = `⏱️ ${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                    
+                    if (exerciseTime <= 180) { // 3 dernières minutes
+                        timerElement.style.background = '#ffcccb';
+                        timerElement.style.color = '#d32f2f';
+                    }
+                    
+                    if (exerciseTime <= 0) {
+                        clearInterval(exerciseTimerInterval);
+                        timerElement.textContent = '⏱️ Temps écoulé !';
+                        timerElement.style.background = '#d32f2f';
+                        timerElement.style.color = 'white';
+                        // Cacher le bouton pause quand le temps est écoulé
+                        const pauseBtn = document.getElementById('pauseTimerBtn');
+                        if (pauseBtn) {
+                            pauseBtn.classList.add('hidden');
+                        }
+                    }
+                }
+            }, 1000);
+        }
+
+        function togglePauseTimer() {
+            const pauseBtn = document.getElementById('pauseTimerBtn');
+            const timerElement = document.getElementById('exerciseTimer');
+            
+            if (timerPaused) {
+                // Reprendre le timer
+                timerPaused = false;
+                pauseBtn.textContent = '⏸️ Pause';
+                pauseBtn.classList.remove('paused');
+                
+                // Relancer l'interval
+                exerciseTimerInterval = setInterval(() => {
+                    exerciseTime--;
+                    const minutes = Math.floor(exerciseTime / 60);
+                    const secs = exerciseTime % 60;
+                    if (timerElement) {
+                        timerElement.textContent = `⏱️ ${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                        
+                        if (exerciseTime <= 180) { // 3 dernières minutes
+                            timerElement.style.background = '#ffcccb';
+                            timerElement.style.color = '#d32f2f';
+                        }
+                        
+                        if (exerciseTime <= 0) {
+                            clearInterval(exerciseTimerInterval);
+                            timerElement.textContent = '⏱️ Temps écoulé !';
+                            timerElement.style.background = '#d32f2f';
+                            timerElement.style.color = 'white';
+                            if (pauseBtn) {
+                                pauseBtn.classList.add('hidden');
+                            }
+                        }
+                    }
+                }, 1000);
+            } else {
+                // Mettre en pause
+                timerPaused = true;
+                pauseBtn.textContent = '▶️ Reprendre';
+                pauseBtn.classList.add('paused');
+                
+                // Arrêter l'interval
+                clearInterval(exerciseTimerInterval);
+                exerciseTimerInterval = null;
+                
+                // Ajouter une indication visuelle de pause
+                if (timerElement) {
+                    const currentText = timerElement.textContent;
+                    timerElement.textContent = `⏸️ ${currentText.replace('⏱️ ', '')} (En pause)`;
+                }
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === ' ') {
+                e.preventDefault();
+                // Si on est sur la slide 10
+                if (currentSlide === 10) {
+                    if (!timerStarted) {
+                        // Démarrer le timer
+                        startExerciseTimer();
+                    } else {
+                        // Toggle pause/play
+                        togglePauseTimer();
+                    }
+                } else {
+                    nextSlide();
+                }
+            }
+            if (e.key === 'p' || e.key === 'P') {
+                // Raccourci pour pause sur la slide 10
+                if (currentSlide === 10 && timerStarted) {
+                    togglePauseTimer();
+                }
+            }
+            if (e.key === 'f' || e.key === 'F') {
+                document.documentElement.requestFullscreen();
+            }
+            if (e.key === 'Escape') {
+                document.exitFullscreen();
+            }
+            if (e.key === 't' || e.key === 'T') {
+                const timer = document.getElementById('timer');
+                timer.classList.toggle('active');
+                if (timer.classList.contains('active') && !timerInterval) {
+                    startTimer();
+                }
+            }
+        });
+
+        // Touch/swipe navigation for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            if (touchEndX < touchStartX - 50) nextSlide();
+            if (touchEndX > touchStartX + 50) previousSlide();
+        }
+
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
