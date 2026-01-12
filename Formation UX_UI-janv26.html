@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma - 14 Janvier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            overflow: hidden;
+            height: 100vh;
+        }
+        .slide-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: white;
+        }
+        .slide {
+            background: white;
+            padding: 80px 100px;
+            max-width: 1400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            display: none;
+            border: 1px solid #e0e0e0;
+        }
+        .slide.active {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .duration {
+            position: absolute;
+            top: 40px;
+            right: 50px;
+            background: #000;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 1em;
+        }
+        h1 {
+            color: #000;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        h2 {
+            color: #000;
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            font-weight: 700;
+            border-bottom: 2px solid #000;
+            padding-bottom: 20px;
+        }
+        h3 {
+            color: #000;
+            font-size: 1.6em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        p, li {
+            font-size: 1.3em;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 400;
+        }
+        ul {
+            margin-left: 40px;
+        }
+        .box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 4px;
+        }
+        .box h3 {
+            margin-top: 0;
+        }
+        .highlight {
+            background: #f0f0f0;
+            border-left: 3px solid #000;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .highlight strong {
+            color: #000;
+        }
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            background: white;
+            padding: 20px 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            z-index: 1000;
+        }
+        .nav-btn {
+            background: #000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        .nav-btn:hover {
+            background: #333;
+        }
+        .nav-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .slide-counter {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #000;
+            min-width: 80px;
+            text-align: center;
+        }
+        .pause-slide {
+            text-align: center;
+            padding: 200px 0;
+        }
+        .pause-slide h2 {
+            border: none;
+            padding-bottom: 0;
+            font-size: 4em;
+            margin-bottom: 40px;
+        }
+        .pause-slide p {
+            font-size: 2em;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- SLIDE 1 -->
+        <div class="slide active">
+            <div class="duration">7h</div>
+            <h1>Figma</h1>
+            <p class="subtitle">Interface, Calques, Auto-Layout & Interactions</p>
+            <div style="margin-top: 100px;">
+                <p style="font-size: 1.4em; margin-bottom: 30px;">📍 Lundi 14 janvier</p>
+                <p style="font-size: 1.4em; margin-bottom: 30px;">✅ Vous avez: Maquettes papier et identité visuelle</p>
+                <p style="font-size: 1.4em;">🎯 Aujourd'hui: Passer à Figma et créer vos maquettes numériques</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide">
+            <h2>Programme de la Journée</h2>
+            
+            <h3>Matin (3h30)</h3>
+            <ul style="font-size: 1.3em; line-height: 2.2;">
+                <li>Figma Interface & Calques - <strong>45 min</strong></li>
+                <li>Frames & Grids - <strong>45 min</strong></li>
+                <li>Auto-Layout - <strong>45 min</strong></li>
+                <li>☕ PAUSE - 15 min</li>
+            </ul>
+
+            <h3>Après-midi (3h30)</h3>
+            <ul style="font-size: 1.3em; line-height: 2.2;">
+                <li>Maquettes Basse Fidélité - <strong>60 min</strong></li>
+                <li>Design System & Identité Visuelle - <strong>45 min</strong></li>
+                <li>☕ PAUSE - 15 min</li>
+                <li>Maquettes Haute Fidélité - <strong>30 min</strong></li>
+                <li>Prototypage & Interactions - <strong>30 min</strong></li>
+            </ul>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide">
+            <div class="duration">45 min</div>
+            <h2>1. Figma Interface & Calques</h2>
+
+            <h3>Les zones principales</h3>
+            <div class="box">
+                <p><strong>Panneau gauche (Pages & Calques)</strong></p>
+                <p style="margin-bottom: 30px;">Ici vous organisez votre hiérarchie. Chaque élément doit être nommé clairement.</p>
+                
+                <p><strong>Canvas central</strong></p>
+                <p style="margin-bottom: 30px;">Votre zone de création.</p>
+
+                <p><strong>Panneau droit (Design & Prototype)</strong></p>
+                <p>Propriétés et paramètres de l'élément sélectionné.</p>
+            </div>
+
+            <h3>L'arborescence (Calques)</h3>
+            <div class="highlight">
+                <strong>💡 Règle d'or:</strong> Une bonne arborescence = un bon design system. Nommez vos calques explicitement (pas "Rectangle 1", mais "Button-Primary" par exemple).
+            </div>
+
+            <h3>Conseil</h3>
+            <p>Regroupez vos éléments en frames ou groupes logiques. Ça rend tout plus clair et réutilisable.</p>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide">
+            <div class="duration">45 min</div>
+            <h2>2. Frames & Grids</h2>
+
+            <h3>Qu'est-ce qu'un Frame?</h3>
+            <p>Un frame est un conteneur qui représente un écran (mobile, desktop, etc.). C'est la base de votre design.</p>
+
+            <div class="box">
+                <h3 style="margin-top: 0;">Créer un Frame</h3>
+                <ul>
+                    <li>Sélectionnez l'outil Frame (cmd+f)</li>
+                    <li>Choisissez une présélection (iPhone, Desktop, etc.)</li>
+                    <li>Dessinez votre frame sur le canvas</li>
+                </ul>
+            </div>
+
+            <h3>Tailles de Frame recommandées</h3>
+            <div class="box">
+                <p><strong>📱 Pour les Applications (Mobile)</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li>iPhone: <strong>390 × 844</strong> (moderne)</li>
+                    <li>iPhone Plus: <strong>430 × 932</strong></li>
+                </ul>
+
+                <p style="margin-top: 30px;"><strong>🖥️ Pour les Sites Web (Desktop)</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li>Standard: <strong>1440 × 900</strong> (recommandé)</li>
+                    <li>Full HD: <strong>1920 × 1080</strong></li>
+                </ul>
+
+                <p style="margin-top: 30px; font-size: 1.2em; color: #666;"><strong>⚠️ Chaque groupe choisit son support</strong> (application mobile OU site desktop). Vous créerez vos frames en fonction!</p>
+            </div>
+
+            <h3>Les Grilles</h3>
+            <p>Une grille aide à aligner vos éléments proprement. Elle garantit l'espacement et la cohérence.</p>
+
+            <div class="box">
+                <h3 style="margin-top: 0;">Ajouter une grille</h3>
+                <ul>
+                    <li>Sélectionnez votre frame</li>
+                    <li>Panneau droit → Layout grid → + (Ajouter)</li>
+                    <li>Configurez les propriétés</li>
+                </ul>
+            </div>
+
+            <h3>Propriétés Grid classiques</h3>
+            <div class="box">
+                <p><strong>📱 Pour Mobile (390px)</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li><strong>Type:</strong> Columns</li>
+                    <li><strong>Count:</strong> 4 colonnes</li>
+                    <li><strong>Gutter:</strong> 16px (espacement entre colonnes)</li>
+                    <li><strong>Margin:</strong> 16px (marge sur les côtés)</li>
+                </ul>
+
+                <p style="margin-top: 30px;"><strong>🖥️ Pour Desktop (1440px)</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li><strong>Type:</strong> Columns</li>
+                    <li><strong>Count:</strong> 12 colonnes</li>
+                    <li><strong>Gutter:</strong> 24px (espacement entre colonnes)</li>
+                    <li><strong>Margin:</strong> 32px (marge sur les côtés)</li>
+                </ul>
+
+                <p style="margin-top: 30px;"><strong>⚙️ Propriétés communes</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li><strong>Type:</strong> Columns (c'est le plus courant)</li>
+                    <li><strong>Count:</strong> Nombre de colonnes</li>
+                    <li><strong>Gutter:</strong> Espace ENTRE les colonnes</li>
+                    <li><strong>Margin:</strong> Espace sur les CÔTÉS (left/right)</li>
+                    <li><strong>Offset:</strong> Décalage depuis le début (optionnel)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SLIDE 5 BIS - AUTO-LAYOUT DÉTAILLÉ -->
+        <div class="slide">
+            <div class="duration">45 min</div>
+            <h2>3. Auto-Layout (Détails)</h2>
+
+            <h3>Qu'est-ce que c'est?</h3>
+            <p>L'Auto-Layout est comme le Flexbox en CSS. Il organise automatiquement vos éléments horizontalement ou verticalement, avec espacement et padding.</p>
+
+            <div class="box">
+                <h3 style="margin-top: 0;">Pourquoi c'est important?</h3>
+                <ul>
+                    <li>✓ Responsive automatique</li>
+                    <li>✓ Maintenance facile (ajouter du texte = tout s'ajuste)</li>
+                    <li>✓ Cohérence garantie</li>
+                </ul>
+            </div>
+
+            <h3>Comment l'utiliser - Étapes</h3>
+            <div class="box">
+                <p><strong>1. Groupez vos éléments</strong> (sélectionnez-les)</p>
+                <p><strong>2. Appliquez Auto-Layout</strong> (cmd+A ou right-click → Add auto layout)</p>
+                <p><strong>3. Configurez dans le panneau droit:</strong></p>
+            </div>
+
+            <h3>Les 4 propriétés clés</h3>
+            <div class="box">
+                <p><strong>📍 Direction (Horizontal / Vertical)</strong></p>
+                <p style="margin-left: 20px; color: #666;">Horizontal = éléments côte à côte. Vertical = éléments empilés.</p>
+
+                <p style="margin-top: 20px;"><strong>↔️ Spacing (espacement entre éléments)</strong></p>
+                <p style="margin-left: 20px; color: #666;">Exemple: 12px entre chaque élément.</p>
+
+                <p style="margin-top: 20px;"><strong>📦 Padding (marge interne du groupe)</strong></p>
+                <p style="margin-left: 20px; color: #666;">Exemple: 16px autour du groupe entier.</p>
+
+                <p style="margin-top: 20px;"><strong>⚖️ Alignment (alignement des éléments)</strong></p>
+                <p style="margin-left: 20px; color: #666;">Top, center, bottom, space-between, etc.</p>
+            </div>
+
+            <h3>Exemple concret: Carte d'Exercice</h3>
+            <div class="box">
+                <p><strong>Structure:</strong> Image + Titre + Description + Bouton "Commencer"</p>
+                <p style="margin-top: 15px;"><strong>Appliquez Auto-Layout:</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li>Direction: Vertical (image en haut, puis texte, puis bouton)</li>
+                    <li>Spacing: 12px</li>
+                    <li>Padding: 16px</li>
+                    <li>Alignment: Center</li>
+                </ul>
+                <p style="margin-top: 15px; color: #666;">Résultat: Si vous changez le titre, la carte s'agrandit automatiquement!</p>
+            </div>
+
+            <div class="highlight">
+                <strong>Exercice:</strong> Créez une simple carte (image + titre + bouton) avec Auto-Layout vertical.
+            </div>
+        </div>
+
+        <!-- PAUSE SLIDE -->
+        <div class="slide pause-slide">
+            <h2>☕</h2>
+            <p>PAUSE</p>
+            <p style="font-size: 1.3em; color: #666;">15 minutes</p>
+        </div>
+
+        <!-- SLIDE 6 - COMPOSANTS -->
+        <div class="slide">
+            <div class="duration">20 min</div>
+            <h2>Bonus: Créer des Composants</h2>
+
+            <h3>Qu'est-ce qu'un Composant Figma?</h3>
+            <p>Un composant est un élément <strong>réutilisable et lié</strong>. Si vous changez le composant principal, toutes les copies se mettent à jour automatiquement.</p>
+
+            <div class="box">
+                <h3 style="margin-top: 0;">À quoi ça sert?</h3>
+                <ul>
+                    <li>✓ <strong>Cohérence:</strong> Tous les boutons primaires sont identiques</li>
+                    <li>✓ <strong>Rapidité:</strong> Réutilisez les éléments au lieu de les redessiner</li>
+                    <li>✓ <strong>Maintenance:</strong> Changez 1 bouton = change partout</li>
+                    <li>✓ <strong>Scalabilité:</strong> Facile d'ajouter des variants (states différents)</li>
+                </ul>
+            </div>
+
+            <h3>Comment créer un Composant</h3>
+            <div class="box">
+                <p><strong>1. Créez votre élément</strong> (ex: un bouton avec Auto-Layout)</p>
+                <p><strong>2. Clic droit → Create component</strong></p>
+                <p><strong>3. Donnez-lui un nom clair:</strong> "Button/Primary" ou "Card/Exercise"</p>
+                <p><strong>4. Utilisez-le partout:</strong> Drag & drop le composant depuis les assets</p>
+            </div>
+
+            <h3>Pour votre Projet</h3>
+            <p>Créez des composants pour:</p>
+            <ul>
+                <li>🔘 Boutons (Primary, Secondary, Disabled states)</li>
+                <li>📱 Cartes (avec titre, description, image)</li>
+                <li>📝 Formulaires (input, checkbox, select)</li>
+                <li>⭐ Navigation (tab bar, header)</li>
+            </ul>
+
+            <div class="highlight">
+                <strong>Bonus:</strong> Créez des Variants! Un composant "Button" avec des variants pour normal, hover, disabled. Tout reste lié!
+            </div>
+        </div>
+
+        <!-- SLIDE 6 -->
+        <div class="slide">
+            <div class="duration">60 min</div>
+            <h2>4. Maquettes Basse Fidélité</h2>
+
+            <h3>C'est quoi?</h3>
+            <p>Transposer vos wireframes papier en Figma. Juste la structure, pas de couleurs ni finitions.</p>
+
+            <div class="box">
+                <h3 style="margin-top: 0;">Comment faire</h3>
+                <ul>
+                    <li>Créez un frame pour chaque écran de votre wireframe papier</li>
+                    <li>Organisez vos calques proprement</li>
+                    <li>Utilisez des formes simples (rectangles, texte)</li>
+                    <li>Alignez avec la grille</li>
+                    <li>Gris et blanc uniquement</li>
+                </ul>
+            </div>
+
+            <h3>Checklist</h3>
+            <ul>
+                <li>✓ Tous les écrans du parcours utilisateur</li>
+                <li>✓ Hiérarchie visuelle claire</li>
+                <li>✓ Espacement cohérent</li>
+                <li>✓ Calques bien nommés</li>
+                <li>✓ Auto-Layout appliqué où c'est logique</li>
+                <li>✓ Sur votre support choisi (mobile ou desktop)</li>
+            </ul>
+
+            <div class="highlight">
+                <strong>Important:</strong> Chaque groupe crée sa maquette basse fidélité sur son support (390×844 pour mobile, 1440×900 pour desktop). La structure doit adapter à votre format!
+            </div>
+        </div>
+
+        <!-- SLIDE 7 -->
+        <div class="slide">
+            <div class="duration">45 min</div>
+            <h2>5. Design System & Identité Visuelle</h2>
+
+            <h3>Qu'est-ce qu'un Design System?</h3>
+            <p>C'est votre "bible" visuelle: couleurs, typos, composants réutilisables.</p>
+
+            <div class="box">
+                <h3 style="margin-top: 0;">Inclut:</h3>
+                <ul>
+                    <li><strong>Palette de couleurs</strong> (primaire, secondaire, neutre)</li>
+                    <li><strong>Typographies</strong> (pour les titres, corps, labels)</li>
+                    <li><strong>Composants</strong> (boutons, cartes, formulaires)</li>
+                    <li><strong>Spacing & Grille</strong> (marge standard, padding)</li>
+                    <li><strong>Icônes & Éléments</strong> (symboles visuels cohérents)</li>
+                </ul>
+            </div>
+
+            <h3>Comment créer votre Design System (from scratch)</h3>
+            
+            <div class="box">
+                <p><strong>Étape 1: Créer une page "Design System"</strong></p>
+                <p style="color: #666; font-size: 1.2em;">Dans Figma, créez une nouvelle page (pas un frame) dédiée.</p>
+            </div>
+
+            <div class="box">
+                <p><strong>Étape 2: Section Couleurs</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li>Créez des rectangles (200×100px) pour chaque couleur</li>
+                    <li>Labellisez-les: "Primary", "Secondary", "Neutral", etc.</li>
+                    <li>Notez les valeurs HEX</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <p><strong>Étape 3: Section Typographies</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li>Créez des frames pour chaque typo (H1, H2, Body, Caption)</li>
+                    <li>Notez: police, taille, poids (regular, bold, etc.)</li>
+                    <li>Exemple: "H1: Inter Bold, 32px"</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <p><strong>Étape 4: Section Composants</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li>Créez vos boutons (Primary, Secondary, Disabled)</li>
+                    <li>Créez une carte type</li>
+                    <li>Créez un formulaire type</li>
+                    <li>Utilisez Auto-Layout pour tous!</li>
+                </ul>
+            </div>
+
+            <h3>Pour votre Projet</h3>
+            <p>Partez de votre logo et créez autour:</p>
+            <ul>
+                <li>Palette (couleurs primaire, secondaire, neutres)</li>
+                <li>Typo moderne et lisible</li>
+                <li>Composants adaptés à votre contexte (boutons, cartes, formulaires)</li>
+            </ul>
+
+            <div class="highlight">
+                <strong>Processus:</strong> Couleurs → Typos → Composants. Chaque élément réutilisable dans votre maquette haute fidélité!
+            </div>
+        </div>
+
+        <!-- SLIDE 8 -->
+        <div class="slide">
+            <div class="duration">30 min</div>
+            <h2>6. Maquettes Haute Fidélité</h2>
+
+            <h3>C'est quoi?</h3>
+            <p>Appliquer votre design system (couleurs, typo, style) à vos maquettes basse fidélité.</p>
+
+            <div class="box">
+                <h3 style="margin-top: 0;">Processus</h3>
+                <ul>
+                    <li>Dupliquez votre basse fidélité</li>
+                    <li>Appliquez les couleurs (depuis votre design system)</li>
+                    <li>Changez les typographies</li>
+                    <li>Ajoutez images, icônes, détails</li>
+                    <li>Peaufinez l'espacement</li>
+                </ul>
+            </div>
+
+            <h3>Conseil</h3>
+            <p>Utilisez les composants Figma! Si vous changez un bouton primaire, il se met à jour partout.</p>
+
+            <div class="highlight">
+                <strong>Résultat:</strong> Des maquettes professionnelles et cohérentes, prêtes pour le prototypage.
+            </div>
+        </div>
+
+        <!-- SLIDE 9 -->
+        <div class="slide">
+            <div class="duration">30 min</div>
+            <h2>7. Prototypage & Interactions</h2>
+
+            <h3>Qu'est-ce que le prototypage?</h3>
+            <p>C'est ajouter des interactions à vos maquettes pour montrer comment ça fonctionne (clic sur un bouton → page suivante, hover effects, etc.).</p>
+
+            <div class="box">
+                <h3 style="margin-top: 0;">Types d'interactions basiques</h3>
+                <ul>
+                    <li><strong>Navigation:</strong> Clic sur un bouton → change d'écran</li>
+                    <li><strong>Hover:</strong> Survoler un élément → change de style</li>
+                    <li><strong>Animations:</strong> Transition fluide entre écrans</li>
+                    <li><strong>Scroll:</strong> Actions au scroll</li>
+                </ul>
+            </div>
+
+            <h3>Comment faire dans Figma</h3>
+            <p><strong>1.</strong> Sélectionnez un élément (ex: bouton)</p>
+            <p><strong>2.</strong> Allez à "Prototype" (panneau droit)</p>
+            <p><strong>3.</strong> Cliquez "+" pour ajouter une interaction</p>
+            <p><strong>4.</strong> Configurez: trigger (clic, hover), action (aller à, changer de page)</p>
+
+            <div class="highlight">
+                <strong>DEMO:</strong> Je vais vous montrer mon projet Amoki avec plusieurs interactions réelles. Puis vous en ferez une simple sur votre projet!
+            </div>
+        </div>
+
+        <!-- SLIDE 11 -->
+        <div class="slide">
+            <div class="duration">Bonus</div>
+            <h2>💡 Cas d'usage avancés</h2>
+
+            <h3>1️⃣ Créer un Carrousel Horizontal</h3>
+            <div class="box">
+                <p><strong>Concept:</strong> Plusieurs cartes/éléments alignés horizontalement. L'utilisateur clique sur les flèches pour voir le suivant.</p>
+                
+                <p style="margin-top: 20px;"><strong>Comment faire:</strong></p>
+                <ul>
+                    <li>Créez UN écran avec: [Flèche Gauche] + [Carte 1] + [Flèche Droite]</li>
+                    <li>Dupliquez-le 3-4 fois: Carrousel-1, Carrousel-2, Carrousel-3, Carrousel-4</li>
+                    <li>Changez seulement la carte (image/titre différent dans chaque écran)</li>
+                    <li>Sur le bouton "Flèche Droite" → Prototype → clic → aller à l'écran suivant</li>
+                    <li>Sur le bouton "Flèche Gauche" → clic → aller à l'écran précédent</li>
+                    <li>Animation: "Smart Animate" pour transition fluide</li>
+                </ul>
+
+                <p style="margin-top: 20px;"><strong>Pour votre application:</strong> Parfait pour afficher une série d'éléments (exercices, produits, articles) une par une!</p>
+            </div>
+
+            <h3>2️⃣ Créer un Scroll Vertical</h3>
+            <div class="box">
+                <p><strong>Concept:</strong> Créer l'illusion d'un scroll (contenu qui descend) comme sur un vrai téléphone.</p>
+                
+                <p style="margin-top: 20px;"><strong>Méthode simple:</strong></p>
+                <ul>
+                    <li>Créez UN grand frame (ex: 390×2000px) avec tout votre contenu du haut en bas</li>
+                    <li>Créez une "fenêtre" (frame de 390×844) qui montre seulement la portion visible</li>
+                    <li>En testant le prototype, le contenu semble scroller naturellement</li>
+                </ul>
+
+                <p style="margin-top: 20px;"><strong>Méthode alternative (plus simple):</strong></p>
+                <ul>
+                    <li>Juste montrer les écrans séparés (ex: 3 écrans distincts)</li>
+                    <li>Ajouter des boutons "Charger plus" ou "Voir plus"</li>
+                </ul>
+            </div>
+
+            <div class="highlight">
+                <strong>En mars:</strong> Nous apprendrons les animations avancées pour faire des carrousels et scrolls encore plus fluides et réalistes!
+            </div>
+        </div>
+
+        <!-- PAUSE DÉJEUNER -->
+        <div class="slide pause-slide">
+            <h2>☕</h2>
+            <p>PAUSE</p>
+            <p style="font-size: 1.3em; color: #666;">15 minutes</p>
+        </div>
+
+        <!-- SLIDE 11 -->
+        <div class="slide">
+            <h2>✅ Checklist de Fin de Journée (13/01)</h2>
+            
+            <h3>Vous devez avoir:</h3>
+            <div class="box">
+                <p><strong>📁 Organisation Figma</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li>✓ Frames créées (390×844 mobile OU 1440×900 desktop)</li>
+                    <li>✓ Grille configurée</li>
+                    <li>✓ Calques bien nommés et organisés</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <p><strong>🎨 Maquettes</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li>✓ Basse fidélité (structure propre, gris/blanc)</li>
+                    <li>✓ Design System complet (couleurs, typos, composants)</li>
+                    <li>✓ Haute fidélité (couleurs appliquées, styled)</li>
+                </ul>
+            </div>
+
+            <div class="box">
+                <p><strong>⚙️ Interactivité</strong></p>
+                <ul style="margin-left: 40px;">
+                    <li>✓ Au moins 1-2 interactions basiques (navigation entre écrans)</li>
+                    <li>✓ Prototype testable</li>
+                </ul>
+            </div>
+
+            <div class="highlight">
+                <strong>Résultat:</strong> Des maquettes numériques complètes et interactives, prêtes pour les retouches en mars!
+            </div>
+        </div>
+
+        <!-- SLIDE 12 -->
+        <div class="slide">
+            <h2>📅 Prochaines étapes</h2>
+
+            <h3>En mars (5/03)</h3>
+            <div class="box">
+                <ul style="font-size: 1.3em;">
+                    <li><strong>Interactions avancées</strong> - Animations, micro-interactions</li>
+                    <li><strong>Polish final</strong> - Affinage des détails</li>
+                    <li><strong>Usability Testing</strong> - Tester avec des vrais utilisateurs (optionnel)</li>
+                    <li><strong>Présentation finale</strong> - Montrez votre projet terminé</li>
+                    <li><strong>Portfolio</strong> - Préparez vos projets pour votre portfolio</li>
+                </ul>
+            </div>
+
+            <h3>Conseils</h3>
+            <ul>
+                <li>Gardez une trace de vos fichiers Figma bien organisés</li>
+                <li>Notez les améliorations possibles pour mars</li>
+                <li>Pensez à vos interactions: quelles actions sont clés?</li>
+            </ul>
+
+            <div class="highlight">
+                <strong>Bon travail!</strong> Vous avez accompli beaucoup en 7h. C'est maintenant du travail de pro! 💪
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+        <span class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">18</span>
+        </span>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = document.querySelectorAll('.slide').length;
+        
+        document.getElementById('totalSlides').textContent = totalSlides;
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) { currentSlide = totalSlides; }
+            if (n < 1) { currentSlide = 1; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('currentSlide').textContent = currentSlide;
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 1;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides;
+        }
+        
+        function changeSlide(n) {
+            currentSlide += n;
+            showSlide(currentSlide);
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+        
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>
